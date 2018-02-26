@@ -1,0 +1,80 @@
+<html>
+<head>
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+		  apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
+		  authDomain: "spotmebro-82458.firebaseapp.com",
+		  databaseURL: "https://spotmebro-82458.firebaseio.com",
+		  projectId: "spotmebro-82458",
+		  storageBucket: "spotmebro-82458.appspot.com",
+		  messagingSenderId: "737240148087"
+		};
+		firebase.initializeApp(config);
+
+		var email_val;
+		var securityQuestion_val;
+		var securityAnswer_val;
+
+		var emailInput = document.getElementById("email").value;
+		var answerInput = document.getElementById("answer").value;
+
+		function matchEmail(){
+			document.getElementById("demo").innerHTML = "test";
+
+			var queryEmail = firebase.database().ref("Users").orderByKey();
+			queryEmail.once("value").then(function(snapshot)){
+				snapshot.forEach(function(childSnapshot)){
+					var key = childSnapshot.key;
+					var childData = childSnapshot.val();
+
+					email_val = childSnapshot.val().Email;
+					securityQuestion_val = childSnapshot.val().Security;
+					securityAnswer_val = childSnapshot.val().Answer;
+				}
+			}
+
+			if(emailInput == email_val){
+				window.open("answerSecurityQuestion.html", _self);
+			}	
+			else{
+				alert("This email does not exist!");
+			}
+		}
+
+		function displaySecurityQuestion(){
+			document.write(securityQuestion_val);
+		}
+		
+		function test(){
+			alert("Testing");
+		}
+
+		function matchSecurityAnswer(){
+			if(answerInput == securityAnswer_val){
+				firebase.auth().sendPasswordResetEmail('email_val', actionCodeSettings).then(function() {
+					alert("Password reset email sent!");
+				})
+				catch(function(error){
+					alert("An error has occurred!");
+				});
+			}
+			else{
+				alert("Incorrect security question answer!");
+			}
+		}
+</script>
+	<title>SpotMeBro - Forgot Password</title>
+</head>
+<body>
+	<h1>Password Recovery</h1>
+	<div class="container">
+		<form action="" method="post"> 
+			Email: <input type="text" id="email"><br/>
+			<button onclick="test()">Click me</button>
+		</form>
+	</div>
+	<p id="demo"></p>
+</body>
+</html>
