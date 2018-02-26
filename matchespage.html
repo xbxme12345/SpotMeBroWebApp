@@ -1,0 +1,43 @@
+<HTML>
+<Body>
+<ul id='Your Availabilities'>
+<script>
+	{
+
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
+	    authDomain: "spotmebro-82458.firebaseapp.com",
+	    databaseURL: "https://spotmebro-82458.firebaseio.com",
+	    projectId: "spotmebro-82458",
+	    storageBucket: "spotmebro-82458.appspot.com",
+	    messagingSenderId: "737240148087"
+	  };
+	  
+	  
+	  firebase.initializeApp(config);
+	  
+	  var fbRef = firebase.database().ref();
+	  var uidPERM = firebaseUser.uid;
+	  var availabilities = fbRef.child(uidPERM).child("Availability").val() 
+
+	  times = availabilities.split(",");
+	  for (var k = 0; k < times.length; k++) 
+	  {	  
+		  document.write('<li' + 'value="' + times[k] +'"onclick= "goto(this)">' + 		  times[k] + '</li>');
+	  }	        
+	  
+	  // goto page here
+	  function goto(elm) {
+		//pass var x to next page, var x being time
+	    var x = elm.getAttribute('value');
+	    console.log(x);
+	  }
+	  
+	  
+	                       
+}
+</script>
+</ul>
+</body>
+</HTML>
