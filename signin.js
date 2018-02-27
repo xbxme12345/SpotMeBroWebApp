@@ -57,7 +57,7 @@
       var uidPERM = firebaseUser.uid; // this is correct!!!
       //alert("uidPERM is: " + uidPERM);
       //console.log(firebaseUser.uid);
-      window.location = "testPage.html?uidPerm="+uidPERM;
+      window.location = "mainpage.html?uidPerm="+uidPERM;
       document.getElementById("h1id").innerHTML = uidPERM;
     } else {
       console.log('not logged in');

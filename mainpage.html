@@ -5,12 +5,22 @@
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   <script src="mainpage.js"></script>
   <style>
-    .btn-group button{
+    .btn-group{
+      position: fixed;
+      height: 100%;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      overflow-x: hidden;
+      padding-top: 20px;
       background-color: #3399ff;
-      border: 1px solid black;
+    }
+
+    button{
+      background-color: #3399ff;
+      padding: 20px;
       color: black;
-      padding: 10px 24px;
-      width: 50%;
+      width: 200px;
       display: block;
     }
 
@@ -18,8 +28,8 @@
       background-color: #D3D3D3;
     }
 
-    .container {
-
+    section {
+      margin-left: 200px;
     }
 
     h1{
@@ -34,13 +44,13 @@
 
     <section>
       <img class="mySlides" src="crossfit.jpg" style="width:100%; height:500px">
-      <img class="mySlides" src="powerlifting.png" style="width:100%; height:500px">
+      <img class="mySlides" src="powerlifting.jpg" style="width:100%; height:500px">
       <img class="mySlides" src="cardio.jpg" style="width:100%; height:500px">
     </section>
 
     <nav class="btn-group">
-      <button onclick="matches.html"><strong>Go to your Matches</strong></button>
-      <button onclick="preferences.html"><strong>Go to your Preference Editor</strong></button>
+      <button onclick="matchespage.html"><strong>Go to your Matches</strong></button>
+      <button onclick="preferenceEditor.html"><strong>Go to your Preference Editor</strong></button>
       <button onclick="profile.html"><strong>Go to your Profile</strong></button>
       <button onclick="availability.html"><strong>Select your Availability</strong></button>
       <button onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
