@@ -1,4 +1,4 @@
-<HTML>
+<html>
 <Body>
 <ul id='Your Availabilities'>
 <script>
@@ -13,31 +13,31 @@
 	    storageBucket: "spotmebro-82458.appspot.com",
 	    messagingSenderId: "737240148087"
 	  };
-	  
-	  
+
+
 	  firebase.initializeApp(config);
-	  
+
 	  var fbRef = firebase.database().ref();
 	  var uidPERM = firebaseUser.uid;
-	  var availabilities = fbRef.child(uidPERM).child("Availability").val() 
+	  var availabilities = fbRef.child(uidPERM).child("Availability").val()
 
 	  times = availabilities.split(",");
-	  for (var k = 0; k < times.length; k++) 
-	  {	  
+	  for (var k = 0; k < times.length; k++)
+	  {
 		  document.write('<li' + 'value="' + times[k] +'"onclick= "goto(this)">' + 		  times[k] + '</li>');
-	  }	        
-	  
+	  }
+
 	  // goto page here
 	  function goto(elm) {
 		//pass var x to next page, var x being time
 	    var x = elm.getAttribute('value');
 	    console.log(x);
 	  }
-	  
-	  
-	                       
+
+
+
 }
 </script>
 </ul>
 </body>
-</HTML>
+</html>
