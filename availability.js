@@ -18,12 +18,12 @@
   const ampm = document.getElementById("timeOfDay");
 
   var fbRef = firebase.database().ref()
-  
-  btnSubmit.addEventListener('click', e => 
+
+  btnSubmit.addEventListener('click', e =>
   {
-	  
+
 	  // make same as mobile app
-	  if(ampm == pm)
+	  if(ampm == pm) //if(ampm.value == "PM") this should work
 	  {
 		  switch(hour) {
 		      case 12:
@@ -62,11 +62,11 @@
 		      case 11:
 		          hour = 23;
 		          break;
-		      
+
 		  }
 	  }
-	      var uidPERM = firebaseUser.uid;
-		  
+	    var uidPERM = firebaseUser.uid;
+
 		  var availabilities = fbRef.child(uidPERM).child("Availability").val()
 		  var availabilities = availabilities + "," + day + " " + hour + " " + ampm + " ";
 		  fbRef.child(uidPERM).child("Availability").updates(availabilities);
@@ -75,7 +75,7 @@
 	        Email: txtEmail.value,
 			Gender: //these are supposed to be global vars created in main
 			Style: //these are supposed to be global vars created in main
-	        });   
+	        });
 	}
   });
 } ());
