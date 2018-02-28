@@ -15,6 +15,7 @@
   // Get elements
   const txtEmail = document.getElementById("txtEmail");
   const txtPassword = document.getElementById("txtPassword");
+  const txtPassword = document.getElementById("txtPassword2");
   const gender = document.getElementById("gender");
   const secQ = document.getElementById("securityQuestion");
   const secA = document.getElementById("securityAnswer");
