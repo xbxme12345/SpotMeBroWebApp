@@ -2,7 +2,13 @@
 
   <head>
   </head>
-
+  <nav class="btn-group">
+    <button onclick="matchespage.html"><strong>Go to your Matches</strong></button>
+    <button onclick="preferenceEditor.html"><strong>Go to your Preference Editor</strong></button>
+    <button onclick="profile.html"><strong>Go to your Profile</strong></button>
+    <button onclick="availability.html"><strong>Select your Availability</strong></button>
+    <button onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
+  </nav>
   <body>
 
     <h1> All entries in Firebase</h1>
