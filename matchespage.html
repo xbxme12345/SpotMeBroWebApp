@@ -1,52 +1,99 @@
 <html>
-<Body>
-<ul id='Your Availabilities'>
-<script>
-	{
-
-	  // Initialize Firebase
-	  var config = {
-	    apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
-	    authDomain: "spotmebro-82458.firebaseapp.com",
-	    databaseURL: "https://spotmebro-82458.firebaseio.com",
-	    projectId: "spotmebro-82458",
-	    storageBucket: "spotmebro-82458.appspot.com",
-	    messagingSenderId: "737240148087"
-	  };
-
-
-	  firebase.initializeApp(config);
-
-	  var fbRef = firebase.database().ref();
-	  var uidPERM = firebaseUser.uid;
-	  var availabilities = fbRef.child(uidPERM).child("Availability").val()
-
-	  times = availabilities.split(",");
-	  for (var k = 0; k < times.length; k++)
-	  {
-		  document.write('<li' + 'value="' + times[k] +'"onclick= "goto(this)">' + 		  times[k] + '</li>');
-	  }
-
-	  // goto page here
-	  function goto(elm) {
-		//pass var x to next page, var x being time
-	    var x = elm.getAttribute('value');
-	    console.log(x);
-	  }
+<head>
+	<title>SpotMeBro - Matches</title>
+	<script>
+		{
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
+		    authDomain: "spotmebro-82458.firebaseapp.com",
+		    databaseURL: "https://spotmebro-82458.firebaseio.com",
+		    projectId: "spotmebro-82458",
+		    storageBucket: "spotmebro-82458.appspot.com",
+		    messagingSenderId: "737240148087"
+		  };
 
 
+		  firebase.initializeApp(config);
 
-}
-</script>
-<title> Your Matches</title>
-	<div>
-	//provides a list of potential matches
-	<ul>
-		<li id="Match1"></li>
-		<li id="Match2"></li>
-		<li id="Match3"></li>
-			<li id=" Match4"></li>
+		  var fbRef = firebase.database().ref();
+		  var uidPERM = firebaseUser.uid;
+		  var availabilities = fbRef.child(uidPERM).child("Availability").val()
+
+		  times = availabilities.split(",");
+		  for (var k = 0; k < times.length; k++)
+		  {
+			  document.write('<li' + 'value="' + times[k] +'"onclick= "goto(this)">' + 		  times[k] + '</li>');
+		  }
+
+		  // goto page here
+		  function goto(elm) {
+			//pass var x to next page, var x being time
+		    var x = elm.getAttribute('value');
+		    console.log(x);
+		  }
+	}
+	</script>
+	<style>
+		.btn-group{
+			position: fixed;
+			height: 100%;
+			z-index: 1;
+			top: 0;
+			left: 0;
+			overflow-x: hidden;
+			padding-top: 20px;
+			background-color: #3399ff;
+		}
+
+		button{
+			background-color: #3399ff;
+			padding: 20px;
+			color: black;
+			width: 200px;
+			display: block;
+		}
+
+		.btn-group button:hover{
+			background-color: #D3D3D3;
+		}
+
+		section {
+			margin-left: 200px;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		.container {
+			height: 100%;
+		}
+
+		h1{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<h1>Matches</h1>
+		<nav class="btn-group">
+			<button><a href="mainpage.html"><strong>Home Page</strong></a></button>
+			<button><a href="matchespage.html"><strong>Go to your Matches</strong></a></button>
+			<button><a href="preferenceEditor.html"><strong>Go to your Preference Editor</strong></a></button>
+			<button><a href="profilepage.html"><strong>Go to your Profile</strong></a></button>
+			<button><a href="availability.html"><strong>Select your Availability</strong></a></button>
+			<button onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
+		</nav>
+		<div id="list">
+			<ul>
+				<li id="Match1"></li>
+				<li id="Match2"></li>
+				<li id="Match3"></li>
+				<li id=" Match4"></li>
 			</ul>
 		</div>
+	</div>
 </body>
 </html>
