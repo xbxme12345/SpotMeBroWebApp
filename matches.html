@@ -1,0 +1,34 @@
+<head>
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+		  apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
+		  authDomain: "spotmebro-82458.firebaseapp.com",
+		  databaseURL: "https://spotmebro-82458.firebaseio.com",
+		  projectId: "spotmebro-82458",
+		  storageBucket: "spotmebro-82458.appspot.com",
+		  messagingSenderId: "737240148087"
+		};
+		firebase.initializeApp(config);
+<title> Your Matches</title>
+<nav class="btn-group">
+	<button onclick="matchespage.html"><strong>Go to your Matches</strong></button>
+	<button onclick="preferenceEditor.html"><strong>Go to your Preference Editor</strong></button>
+	<button onclick="profile.html"><strong>Go to your Profile</strong></button>
+	<button onclick="availability.html"><strong>Select your Availability</strong></button>
+	<button onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
+</nav>
+<body>
+	<div>
+	//provides a list of potential matches
+	<ul>
+		<li id="Match1"></li>
+		<li id="Match2"></li>
+		<li id="Match3"></li>
+			<li id=" Match4"></li>
+			</ul>
+		</div>
+</body>
+
+		</head>
