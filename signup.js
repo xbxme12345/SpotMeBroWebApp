@@ -12,8 +12,7 @@
   firebase.initializeApp(config);
 
 
-  // Get elements' reference. Later use .value
-  // Did not work if I used .value here
+  // Get elements
   const txtEmail = document.getElementById("txtEmail");
   const txtPassword = document.getElementById("txtPassword");
   const gender = document.getElementById("gender");
@@ -44,25 +43,24 @@
   // add a real time listener
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
-
-      /* using .value only works here not at var initialization */
       var uidPERM = firebaseUser.uid;
-      fbRef.child(uidPERM).set({
 
+      fbRef.child(uidPERM).set({
+        // using .value only works here not at var initialization
         Answer: secA.value,
         Email: txtEmail.value,
         Gender: gender.value,
         Security: secQ.value,
-      });
+        });
 
-        // creates the new subset of data, Preferences, for previous entry
+
         fbRef.child(uidPERM).child("Preferences").set({
-          // unlike mobile app, cannot have space between key's name
+          // using .value only works here not at var initialization
           Preferred_Gender: prefgen.value,
           Style: liftStyle.value
         });
 
-      // passes hashed id as variable in URL
+
       window.location = "mainpage.html?uidPerm="+uidPERM;
       document.getElementById("mainpageh1").innerHTML = uidPERM;
     } else {
