@@ -15,7 +15,7 @@
   // Get elements
   const txtEmail = document.getElementById("txtEmail");
   const txtPassword = document.getElementById("txtPassword");
-  const txtPassword = document.getElementById("txtPassword2");
+  const txtPassword2 = document.getElementById("txtPassword2");
   const gender = document.getElementById("gender");
   const secQ = document.getElementById("securityQuestion");
   const secA = document.getElementById("securityAnswer");
@@ -31,8 +31,16 @@
     const pass = txtPassword.value;
     const auth = firebase.auth();
     // sign in
-    const promise = auth.createUserWithEmailAndPassword(email, pass);
-    promise.catch(e => console.log(e.message));
+    if( txtPassword == txtPassword2)
+    {
+      const promise = auth.createUserWithEmailAndPassword(email, pass);
+      promise.catch(e => console.log(e.message));
+    }
+    else
+    {
+      console.log('passwords don't match');
+    }
+    
   });
 
 
