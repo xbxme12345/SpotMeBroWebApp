@@ -12,10 +12,6 @@
   firebase.initializeApp(config);
 
 
-  /* This page is not being used currently but contains plenty of code
-      that can be reused plenty of times throughout app */
-
-
 
   // Get elements
   const txtEmail = document.getElementById("txtEmail");
@@ -36,6 +32,7 @@
   });
 
 
+  /* Don't need this for the sign-in page
   // add sign up event
   btnSignUp.addEventListener('click', e => {
     // get email and pass
@@ -45,9 +42,13 @@
     // sign in
     const promise = auth.createUserWithEmailAndPassword(email, pass);
     promise.catch(e => console.log(e.message));
-  });
+  }); */
 
 
+  /* do not need logout for sign-in page
+  btnLogout.addEventListener('click', e => {
+    firebase.auth().signOut();
+  }); */
 
 
   // add a real time listener
@@ -60,6 +61,7 @@
       document.getElementById("h1id").innerHTML = uidPERM;
     } else {
       console.log('not logged in');
+      btnLogout.classList.add('hide');
     }
   })
 

@@ -44,7 +44,7 @@ dbRefObject.once("value", function(snapshot) {
 
 
 dbRefObject.on("value", snap => {
-  console.log(snap.val());
+  console.log(snap.val()); // <-------------- IMPORTANT AS FUCKKK!?
 });
 
 
