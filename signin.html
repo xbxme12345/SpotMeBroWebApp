@@ -1,40 +1,40 @@
 <html>
-
 <head>
 	<title>Sign-in!</title>
 
 	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-
-	<!-- js function to restrict to WIT emails
-	<script>
-	function validateForm() {
-			var emailInput = document.forms["signup_form"]["email"].value;
-			if (emailInput == "") {
-					alert("Name must be filled out!");
-					return false;
-			}
-			if (!emailInput.includes("@wit.edu")) {
-					alert("MUST BE WIT EMAIL!");
-					return false;
-			}
-	}
-	</script>
-	-->
-
+	<link rel="stylesheet" type="text/css" href="signin.css">
+			<script>
+			/*js function to restrict to WIT emails
+			function validateForm() {
+					var emailInput = document.forms["signup_form"]["email"].value;
+					if (emailInput == "") {
+							alert("Name must be filled out!");
+							return false;
+					}
+					if (!emailInput.includes("@wit.edu")) {
+							alert("MUST BE WIT EMAIL!");
+							return false;
+					}
+			}*/
+			</script>
 </head>
-<body id="bodyid">
-	<h1>SpotMeBro Sign-In</h1>
+<body>
 	<div class="container">
-		Email:</br>
-		<input id="txtEmail" type="email" placeholder="Email"><br>
-		Password</br>
-		<input id="txtPassword" type="password" placeholder="Password"></br>
-	</div>
-	<br>
-	<div class="button">
-		<button id="btnLogin" class="btn btn-action">Login</button>
-		<button><a href="signup.html" style="text-decoration:none">Sign-Up!</a></button>
+		<h1>SpotMeBro Sign-In</h1>
+		<div id="signinInfo">
+			Email:</br>
+			<input id="txtEmail" type="email" placeholder="Email"><br>
+			Password</br>
+			<input id="txtPassword" type="password" placeholder="Password"></br>
+		</div>
+		<br>
+		<div id="button">
+			<button id="btnLogin" class="btn btn-action">Login</button>
+			<button id="btnSignUp"><a href="signup.html" style="text-decoration:none">Sign-Up!</a></button>
+			<button id="btnReset"><a href="resetpassword.html" style="text-decoration:none">Reset Password</a></button>
+		</div>
 	</div>
 
 	<script src="signin.js"></script>
