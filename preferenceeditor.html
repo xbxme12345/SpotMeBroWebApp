@@ -1,47 +1,10 @@
 <html>
 <head>
   <script src="mainpage.js"></script>
-  <style>
-    .btn-group{
-      position: fixed;
-      height: 100%;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      overflow-x: hidden;
-      padding-top: 20px;
-      background-color: #3399ff;
-    }
-
-    button{
-      background-color: #3399ff;
-      padding: 20px;
-      color: black;
-      width: 200px;
-      display: block;
-    }
-
-    .btn-group button:hover{
-      background-color: #D3D3D3;
-    }
-
-    .container{
-      height: 100%;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    h1{
-      text-align: center;
-    }
-
-  </style>
+  <link rel="stylesheet" type="text/css" href="preferenceeditor.css">
 </head>
 <body>
-  <div id="container">
-    <h1>Preference Editor</h1>
+  <div class="container">
     <nav class="btn-group">
       <button><a href="mainpage.html"><strong>Home Page</strong></a></button>
       <button><a href="matchespage.html"><strong>Go to your Matches</strong></a></button>
@@ -50,6 +13,28 @@
       <button><a href="availability.html"><strong>Select your Availability</strong></a></button>
       <button onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
     </nav>
+    <div id="preferenceContainer">
+      <h1>Preference Editor</h1>
+      <div id="genderPref">
+        Preferred Partner's Gender:
+        <select id="prefgender" name="prefgender">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Both">Both</option>
+          <option value="Other">Other</option>
+          <option value="NoPreference">No Preference</option>
+        </select> </br>
+      </div>
+      <div id="stylePref">
+        Style:
+        <select id="prefStyle" name="style">
+          <option value="CrossFit">Crossfit</option>
+          <option value="PowerLifting">Powerlifting</option>
+          <option value="Cardio">Cardio</option>
+        </select>
+      </div>
+      <button id="submitPref" onclick="">Submit</button>
+    </div>
   </div>
 </body>
 </html>

@@ -16,9 +16,9 @@
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
       var currentUser = firebaseUser.uid;
-	  var gender = fbRef.child(uidPERM).child("Gender").val();
-	  var pref_gender = fbRef.child(uidPERM).child("Preferences").child("Preferred_Gender").val();
-	  var style = fbRef.child(uidPERM).child("Preferences").child("Style").val();
+  	  var gender = fbRef.child(uidPERM).child("Gender").val();
+  	  var pref_gender = fbRef.child(uidPERM).child("Preferences").child("Preferred_Gender").val();
+  	  var style = fbRef.child(uidPERM).child("Preferences").child("Style").val();
 	  //assign as global vars
 
     } else {
@@ -27,6 +27,5 @@
       window.location = "signin.html";
     }
   });
-
 
 } ());

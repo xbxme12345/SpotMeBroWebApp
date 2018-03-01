@@ -1,0 +1,70 @@
+.btn-group{
+  position: fixed;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  background-color: #3399ff;
+}
+
+.btn-group button{
+  background-color: #3399ff;
+  padding: 20px;
+  color: black;
+  width: 200px;
+  display: block;
+}
+
+.btn-group button:hover{
+  background-color: #D3D3D3;
+}
+
+a {
+  text-decoration: none;
+}
+#preferenceContainer {
+  width: 450px;
+  padding: 30px;
+  margin: 40px auto;
+  background: #FFF;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+}
+#preferenceContainer h1 {
+  background: #3399ff;
+  padding: 20px 30px 15px 30px;
+  margin: -30px -30px 30px -30px;
+  border-radius: 10px 10px 0 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+  font: normal 30px, serif;
+  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+  border: 1px solid #257C9E;
+  text-align: center;
+}
+#preferenceContainer #genderPref,
+#preferenceContainer #stylePref {
+  padding: 5px;
+  background: #F8F8F8;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+#preferenceContainer #prefGender,
+#preferenceContainer #prefStyle {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #fff;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+}
+#preferenceContainer button{
+  background: #3399ff;
+  padding: 8px 20px 8px 20px;
+  border-radius: 5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+  border: 1px solid #257C9E;
+}
