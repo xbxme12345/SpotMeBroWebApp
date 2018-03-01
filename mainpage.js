@@ -28,4 +28,9 @@
     }
   });
 
+  /*firebase.auth().signOut(firebaseUser =>{
+    console.log("Signed Out");
+    )
+  });*/
+
 } ());
