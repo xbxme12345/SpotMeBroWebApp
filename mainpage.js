@@ -13,9 +13,6 @@
 
   var fbRef = firebase.database().ref().child('Users');
 
-
-
-
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
       var currentUser = firebaseUser.uid;

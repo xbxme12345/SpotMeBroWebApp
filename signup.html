@@ -4,18 +4,25 @@
   <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
+
+  <style>
+  a {
+    text-decoration: none;
+  }
+  </style>
 </head>
 
 <body>
 
-  <h1 id="h1id">Sign-up</h1>
+  <h1 id="h1id">Sign-up for SpotMeBro</h1>
 
   <div class="container">
     Email:
 		<input id="txtEmail" type="email" placeholder="Email"></br>
     Password:
 		<input id="txtPassword" type="password" placeholder="Password"></br>
-		<input id="txtPassword2" type="password" placeholder="Password Validation"></br>
+    Confirm Password:
+		<input id="txtPassword2" type="password" placeholder="Confirm Password"></br>
 
     Your Gender:
     <select id="gender" name="gender">
@@ -53,6 +60,7 @@
     <option value="Other">Other</option>
     </select> </br>
 
+    <button id="btnBack"><a href="signin.html">Back</a></button>
 		<button id="btnSignUp" class="btn btn-secondary">
 			Submit
 		</button>

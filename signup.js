@@ -11,7 +11,6 @@
   };
   firebase.initializeApp(config);
 
-
   // Get elements' reference. Later use .value
   // Did not work if I used .value here
   const txtEmail = document.getElementById("txtEmail");
@@ -41,7 +40,7 @@
     {
       console.log('passwords don't match');
     }
-    
+
   });
 
 

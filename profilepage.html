@@ -68,6 +68,35 @@
 	</div>
 
 	<script>
+		// reference to save data must be set globally
+		var fbRef = firebase.database().ref().child('Users');
+
+	  firebase.auth().onAuthStateChanged(user => {
+	  	if(user){
+	      var uidPERM = user.uid;
+	      document.getElementById("Email").innerHTML = uidPERM;//??
+	      fbEmail = user.email;
+	      fbGender = user.gender;
+
+				fbRef.on("value", snap =>{
+		      try
+		      {
+		        var availability = snap.child("Availability").val()
+		      }
+		      catch(err)
+		      {
+		        //no availability was entered yet
+		      }
+		      var style = snap.child("Style").val()
+		      var gender = snap.child("Gender").val()
+	    	});
+
+	    fbSecurityQ = user.security;
+	    fbSecurityA = user.answer;
+	  	}
+		})
+
+		// Check below
 		var fbEmail, fbGender, fbSecurityQ, fbSecurityA, uidPERM
 		var user = firebase.auth().currentUser;
 
