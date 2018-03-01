@@ -1,9 +1,10 @@
-<html>
 <head>
+<head>
+  <title>About Us</title>
   <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-  <link rel="stylesheet" type="text/css" href="preferenceeditor.css">
   <script src="mainpage.js"></script>
+  <link rel="stylesheet" type="text/css" href="about.css">
 </head>
 <body>
   <div class="container">
@@ -16,28 +17,13 @@
       <button><a href="availability.html"><strong>Select your Availability</strong></a></button>
       <button onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
     </nav>
-    <div id="preferenceContainer">
-      <h1>Preference Editor</h1>
-      <div id="genderPref">
-        Preferred Partner's Gender:
-        <select id="prefgender" name="prefgender">
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Both">Both</option>
-          <option value="Other">Other</option>
-          <option value="NoPreference">No Preference</option>
-        </select> </br>
+    <div id="aboutContainer">
+      <h1>About SpotMeBro</h1>
+      <div id="about">
+        <p>(Current test sample): SpotMeBro is an online community that pairs users with other users
+          of a similar workout style and availability.</p>
       </div>
-      <div id="stylePref">
-        Style:
-        <select id="prefStyle" name="style">
-          <option value="CrossFit">Crossfit</option>
-          <option value="PowerLifting">Powerlifting</option>
-          <option value="Cardio">Cardio</option>
-        </select>
-      </div>
-      <button id="submitPref" onclick="">Submit</button>
     </div>
   </div>
 </body>
-</html>
+</head>

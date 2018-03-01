@@ -1,7 +1,9 @@
 <html>
 <head>
 	<title>SpotMeBro - Matches</title>
-	 <script src="mainpage.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+	<script src="mainpage.js"></script>
 	<script>
 		{
 		  // Initialize Firebase
@@ -13,7 +15,6 @@
 		    storageBucket: "spotmebro-82458.appspot.com",
 		    messagingSenderId: "737240148087"
 		  };
-
 
 		  firebase.initializeApp(config);
 
@@ -35,65 +36,24 @@
 		  }
 	}
 	</script>
-	<style>
-		.btn-group{
-			position: fixed;
-			height: 100%;
-			z-index: 1;
-			top: 0;
-			left: 0;
-			overflow-x: hidden;
-			padding-top: 20px;
-			background-color: #3399ff;
-		}
-
-		button{
-			background-color: #3399ff;
-			padding: 20px;
-			color: black;
-			width: 200px;
-			display: block;
-		}
-
-		.btn-group button:hover{
-			background-color: #D3D3D3;
-		}
-
-		section {
-			margin-left: 200px;
-		}
-
-		a {
-			text-decoration: none;
-		}
-
-		.container {
-			height: 100%;
-		}
-
-		h1{
-			text-align: center;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="matchespage.css">
 </head>
 <body>
-	<div id="container">
-		<h1>Matches</h1>
+	<div class="container">
 		<nav class="btn-group">
 			<button><a href="mainpage.html"><strong>Home Page</strong></a></button>
+			<button><a href="about.html"><strong>About Us</strong></a></button>
 			<button><a href="matchespage.html"><strong>Go to your Matches</strong></a></button>
 			<button><a href="preferenceEditor.html"><strong>Go to your Preference Editor</strong></a></button>
 			<button><a href="profilepage.html"><strong>Go to your Profile</strong></a></button>
 			<button><a href="availability.html"><strong>Select your Availability</strong></a></button>
 			<button onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
 		</nav>
-		<div id="list">
-			<ul>
-				<li id="Match1"></li>
-				<li id="Match2"></li>
-				<li id="Match3"></li>
-				<li id=" Match4"></li>
-			</ul>
+		<div id="matchContainer">
+			<h1>Matches</h1>
+			<div id="availabilityList">
+				<p>Availability:</p>
+			</div>
 		</div>
 	</div>
 </body>

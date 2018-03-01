@@ -1,4 +1,9 @@
 (function() {
+  //****************************
+  //DISREGARD THIS APP.JS DOCUMENT ATM, CURRENTLY
+  //USING MAINPAGE.JS FOR ALL OF THE OTHER PAGES
+  //IN ORDER TO BE ABLE TO LOG OUT
+  //*****************************
 
   // Initialize Firebase
   var config = {
@@ -23,7 +28,6 @@
   const btnLogin = document.getElementById("btnLogin");
   const btnSignUp = document.getElementById("btnSignUp");
 
-  const fbRef = firebase.database().ref().child('Users');
 
   // Add login event
   btnLogin.addEventListener('click', e => {
@@ -42,10 +46,9 @@
     if (firebaseUser) {
       // if proper user logged in, get their hashed id, pass it through
       // URL as variable uidPERM, and redirect to mainpage.html
-      var currentUser = firebaseUser.uid;
-      var gender = fbRef.child(uidPERM).child("Gender").val();
-      var pref_gender = fbRef.child(uidPERM).child("Preferences").child("Preferred_Gender").val();
-      var style = fbRef.child(uidPERM).child("Preferences").child("Style").val();
+      var uidPERM = firebaseUser.uid;
+      window.location = "mainpage.html?uidPerm="+uidPERM;
+      document.getElementById("h1id").innerHTML = uidPERM;
     } else {
       console.log('not logged in');
       window.location = "signin.html";
