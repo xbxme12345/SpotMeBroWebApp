@@ -23,6 +23,7 @@
   const btnLogin = document.getElementById("btnLogin");
   const btnSignUp = document.getElementById("btnSignUp");
 
+  const fbRef = firebase.database().ref().child('Users');
 
   // Add login event
   btnLogin.addEventListener('click', e => {
@@ -37,16 +38,17 @@
 
 
 
-  // add a real time listener
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
-      var uidPERM = firebaseUser.uid; // this is correct!!!
-      //alert("uidPERM is: " + uidPERM);
-      //console.log(firebaseUser.uid);
-      window.location = "testPage.html?uidPerm="+uidPERM;
-      document.getElementById("h1id").innerHTML = uidPERM;
+      // if proper user logged in, get their hashed id, pass it through
+      // URL as variable uidPERM, and redirect to mainpage.html
+      var currentUser = firebaseUser.uid;
+      var gender = fbRef.child(uidPERM).child("Gender").val();
+      var pref_gender = fbRef.child(uidPERM).child("Preferences").child("Preferred_Gender").val();
+      var style = fbRef.child(uidPERM).child("Preferences").child("Style").val();
     } else {
       console.log('not logged in');
+      window.location = "signin.html";
     }
   })
 

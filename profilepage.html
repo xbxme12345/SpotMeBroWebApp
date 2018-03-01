@@ -1,44 +1,11 @@
 <html>
 <head>
 	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
-  <script src="mainpage.js"></script>
-	<style>
-    .btn-group{
-      position: fixed;
-      height: 100%;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      overflow-x: hidden;
-      padding-top: 20px;
-      background-color: #3399ff;
-    }
-
-    button{
-      background-color: #3399ff;
-      padding: 20px;
-      color: black;
-      width: 200px;
-      display: block;
-    }
-
-    .btn-group button:hover{
-      background-color: #D3D3D3;
-		}
-		div .profileInfo{
-			margin-left: 200px;
-		}
-		a {
-			text-decoration: none;
-		}
-		h1{
-			text-align: center;
-		}
-	</style>
+  <script src="app.js"></script>
+	<link rel="stylesheet" type="text/css" href="profilepage.css">
 </head>
 <body>
-	<div id="container">
-		<h1>Profile</h1>
+	<div class="container">
 		<nav class="btn-group">
 			<button><a href="mainpage.html"><strong>Home Page</strong></a></button>
 			<button><a href="matchespage.html"><strong>Go to your Matches</strong></a></button>
@@ -47,11 +14,14 @@
 			<button><a href="availability.html"><strong>Select your Availability</strong></a></button>
 			<button onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
 		</nav>
-		<div id="profileInfo">
-			<p id="Email">Email:</p>
-			<p id="Gender">Gender: </p>
-			<p id="Security_Question"> Security Question: </p>
-			<p id="Security_Answer">Security Answer: </p>
+		<div id="profileContainer">
+			<h1>Profile</h1>
+			<div id="profileInfo">
+				<p id="Email">Email:</p>
+				<p id="Gender">Gender: </p>
+				<p id="Security_Question"> Security Question: </p>
+				<p id="Security_Answer">Security Answer: </p>
+			</div>
 		</div>
 	</div>
 
@@ -84,70 +54,6 @@
 	  	}
 		})
 
-		/* Check below
-		var fbEmail, fbGender, fbSecurityQ, fbSecurityA, uidPERM
-		var user = firebase.auth().currentUser;
-
-
-		var userRef = firebase.database().ref();
-		var key = userRef.key;
-		key = userRef.child(user + "/email").key();
-
-		//document.getElementById("Email").innerHTML = key;
-
-		//Authenticate current user
-		firebase.auth().onAuthStateChanged(user => {
-			if(user){
-				var uidPERM = user.uid;
-				document.getElementById("Email").innerHTML = uidPERM;
-				fbEmail = user.email;
-				fbGender = user.gender;
-				fbSecurityQ = user.security;
-				fbSecurityA = user.answer;
-			}
-		})
-
-
-
-
-			var fbRef = firebase.database().ref("Users");
-			//var uidPERM = firebaseUser.uid;
-
-			var user = firebase.auth().currentUser;
-			var entries = [];*/
-
-				/*if(user) {
-					var fbEmail = DataSnapshot.child();
-					document.getElementById("Email").innerHTML = fbEmail;
-				}
-
-
-			//var fbEmail, fbGender, fbSecurityQ, fbSecurityA;
-
-			/*firebase.auth().onAuthStateChanged(function(user) {
-				if(user){
-					var fbEmail = user.child("Email").val();
-					var fbGender = user.child("Gender").val();
-					var fbSecurityQ = user.child("Security").val();
-					var fbSecurityA = user.child("Answer").val();
-
-					document.getElementById("Email").innerHTML = fbEmail;
-				}
-				else{
-					console.log("No user is signed in");
-				}
-			});
-			var key = Object.keys(snapshot.val())[1];
-
-			var fbEmail = fbRef.child(uidPERM).child("Email").val();
-			var fbGender = fbRef.child(uidPERM).child("Gender").val();
-			var fbSecurityQ = fbRef.child(uidPERM).child("Security").val();
-			var fbSecurityA = fbRef.child(uidPERM).child("Answer").val();
-
-			var email = document.getElementById("emailHeading");
-			var emailContent = document.createElement("p");
-			emailContent.appendChild(document.createTextNode(fbEmail));
-			email.appendChild(emailContent);*/
 	</script>
 </body>
 </html>
