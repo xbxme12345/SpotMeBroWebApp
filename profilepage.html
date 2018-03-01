@@ -56,6 +56,35 @@
 	</div>
 
 	<script>
+		// reference to save data must be set globally
+		var fbRef = firebase.database().ref().child('Users');
+
+	  firebase.auth().onAuthStateChanged(user => {
+	  	if(user){
+	      var uidPERM = user.uid;
+	      document.getElementById("Email").innerHTML = uidPERM;//??
+	      fbEmail = user.email;
+	      fbGender = user.gender;
+
+				fbRef.on("value", snap =>{
+		      try
+		      {
+		        var availability = snap.child("Availability").val()
+		      }
+		      catch(err)
+		      {
+		        //no availability was entered yet
+		      }
+		      var style = snap.child("Style").val()
+		      var gender = snap.child("Gender").val()
+	    	});
+
+	    fbSecurityQ = user.security;
+	    fbSecurityA = user.answer;
+	  	}
+		})
+
+		/* Check below
 		var fbEmail, fbGender, fbSecurityQ, fbSecurityA, uidPERM
 		var user = firebase.auth().currentUser;
 
@@ -81,7 +110,7 @@
 
 
 
-			/*var fbRef = firebase.database().ref("Users");
+			var fbRef = firebase.database().ref("Users");
 			//var uidPERM = firebaseUser.uid;
 
 			var user = firebase.auth().currentUser;
@@ -90,7 +119,7 @@
 				/*if(user) {
 					var fbEmail = DataSnapshot.child();
 					document.getElementById("Email").innerHTML = fbEmail;
-				}*/
+				}
 
 
 			//var fbEmail, fbGender, fbSecurityQ, fbSecurityA;
@@ -113,9 +142,9 @@
 			var fbEmail = fbRef.child(uidPERM).child("Email").val();
 			var fbGender = fbRef.child(uidPERM).child("Gender").val();
 			var fbSecurityQ = fbRef.child(uidPERM).child("Security").val();
-			var fbSecurityA = fbRef.child(uidPERM).child("Answer").val();*/
+			var fbSecurityA = fbRef.child(uidPERM).child("Answer").val();
 
-			/*var email = document.getElementById("emailHeading");
+			var email = document.getElementById("emailHeading");
 			var emailContent = document.createElement("p");
 			emailContent.appendChild(document.createTextNode(fbEmail));
 			email.appendChild(emailContent);*/
