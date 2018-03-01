@@ -1,13 +1,16 @@
 <html>
-
 <head>
   <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="signup.js"></script>
+  <style>
+    a{
+      text-decoration: none;
+    }
+  </style>
 </head>
-
 <body>
-
   <h1 id="h1id">Sign-up</h1>
 
   <div class="container">
@@ -18,20 +21,20 @@
 
     Your Gender:
     <select id="gender" name="gender">
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-    <option value="Other">Other</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
     </select> </br>
 
     Security Question:
     <select id="securityQuestion" name="securityQuestion">
-    <option value="What street did you grow up on?">What street did you grow up on?</option>
-    <option value="What was the name of your first pet?">What was the name of your first pet?</option>
-    <option value="What is your father's middle name?">What is your father's middle name?</option>
-    <option value="What is your high school mascot?">What is your high school mascot?</option>
-    <option value="What is the name of your best friend?">What is the name of your best friend?</option>
-    <option value="What is your favorite color?">What is your favorite color?</option>
-  </select> </br>
+      <option value="What street did you grow up on?">What street did you grow up on?</option>
+      <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+      <option value="What is your father's middle name?">What is your father's middle name?</option>
+      <option value="What is your high school mascot?">What is your high school mascot?</option>
+      <option value="What is the name of your best friend?">What is the name of your best friend?</option>
+      <option value="What is your favorite color?">What is your favorite color?</option>
+    </select> </br>
 
     Security Answer:
     <input id="securityAnswer" type="text"></br>
@@ -39,27 +42,21 @@
 
     Style:
     <select id="style" name="style">
-    <option value="CrossFit">Crossfit</option>
-    <option value="PowerLifting">Powerlifting</option>
-    <option value="Cardio">Cardio</option>
+      <option value="CrossFit">Crossfit</option>
+      <option value="PowerLifting">Powerlifting</option>
+      <option value="Cardio">Cardio</option>
     </select> </br>
-
 
     Preferred Partner's Gender:
     <select id="prefgender" name="prefgender">
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-    <option value="Other">Other</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
     </select> </br>
 
-		<button id="btnSignUp" class="btn btn-secondary">
-			Submit
-		</button>
+    <button id="back"><a href="signin.html">Back</a></button>
+		<button id="btnSignUp" class="btn btn-secondary">Submit</button>
 
 	</div>
-
-	<script src="signup.js"></script>
-
-
 </body>
 </html>
