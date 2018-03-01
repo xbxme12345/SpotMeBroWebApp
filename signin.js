@@ -13,7 +13,8 @@
 
 
 
-  // Get elements
+  // Get elements' reference. Later use .value
+  // Did not work if I used .value here
   const txtEmail = document.getElementById("txtEmail");
   const txtPassword = document.getElementById("txtPassword");
   const btnLogin = document.getElementById("btnLogin");
@@ -28,6 +29,7 @@
     const auth = firebase.auth();
     // Sign in
     const promise = auth.signInWithEmailAndPassword(email, password);
+    // error messages include email already in use and improper email entered
     promise.catch(e => console.log(e.message));
   });
 
@@ -54,9 +56,9 @@
   // add a real time listener
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
-      var uidPERM = firebaseUser.uid; // this is correct!!!
-      //alert("uidPERM is: " + uidPERM);
-      //console.log(firebaseUser.uid);
+      // if proper user logged in, get their hashed id, pass it through
+      // URL as variable uidPERM, and redirect to mainpage.html
+      var uidPERM = firebaseUser.uid;
       window.location = "mainpage.html?uidPerm="+uidPERM;
       document.getElementById("h1id").innerHTML = uidPERM;
     } else {

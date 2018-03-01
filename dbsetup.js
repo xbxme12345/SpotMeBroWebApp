@@ -1,4 +1,4 @@
-// Initialize Firebase
+/* Not being used but contains firebase db info */
 var config = {
   apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
   authDomain: "spotmebro-82458.firebaseapp.com",

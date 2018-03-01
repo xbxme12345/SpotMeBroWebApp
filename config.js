@@ -22,15 +22,6 @@ dbRefObject.on("value", snap => {
 });
 
 
-/*
-dbRefObject.on("value", snap => {
-  console.log(snap.val());
-}); */
-
-
-
-
-
 
 
 var uidArr = [];
@@ -44,14 +35,14 @@ dbRefObject.once("value", function(snapshot) {
 
 
 dbRefObject.on("value", snap => {
-  console.log(snap.val()); // <-------------- IMPORTANT AS FUCKKK!?
+  console.log(snap.val());
 });
 
 
 
   for (var i=0; i < uidArr.length; i++){
     //pObject.innerText += JSON.stringify(snap.child(uidArr[i]).child("Email").key, null, 3);   //JSON.stringify(snap.val(), null, 3);
-    console.log("it issssssssss " + uidArr[i]);
+    console.log("it is " + uidArr[i]);
     pObject.innerText += snap.child(uidArr[i]).child("Email").key;
 
   }
