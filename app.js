@@ -14,7 +14,7 @@
     storageBucket: "spotmebro-82458.appspot.com",
     messagingSenderId: "737240148087"
   };
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
   var fbRef = firebase.database().ref().child("Users");
 
@@ -65,10 +65,12 @@
     const securityAnswer = txtSecurityAnswer.value;
     const style = styleSelect.value;
     const prefGender = prefGenderSelect.value;
+    const auth = firebase.auth();
 
     //Signup
     if(password == confirmPassword){
-
+      const promise = auth.createUserWithEmailAndPassword(email, password);
+      promise.catch(e => console.log(e.message));
     } else {
       alert("Passwords do not match.");
       console.log("Passwords do not match. Try again.");
