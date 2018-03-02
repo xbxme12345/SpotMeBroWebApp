@@ -36,7 +36,7 @@
 }
 
 .container #button #btnLogin,
-.container #button #btnSignUp,
+.container #button #btn_SignUp,
 .container #button #btnReset {
   background: #3399ff;
   padding: 8px 20px 8px 20px;
