@@ -20,7 +20,7 @@
 		<div id="profileContainer">
 			<h1>Profile</h1>
 			<div id="profileInfo">
-				<p id="Email">Email:</p>
+				<p id="Email">Email: </p>
 				<p id="Gender">Gender: </p>
 				<p id="Security_Question"> Security Question: </p>
 				<p id="Security_Answer">Security Answer: </p>
@@ -35,9 +35,20 @@
 	  firebase.auth().onAuthStateChanged(user => {
 	  	if(user){
 	      var uidPERM = user.uid;
-	      document.getElementById("Email").innerHTML = uidPERM;//??
 	      fbEmail = user.email;
-	      fbGender = user.gender;
+	      //fbGender = user.gender; //undefined
+				document.getElementById("Email").innerHTML += fbEmail;
+
+				var userId = firebase.auth().currentUser.uid;
+				return firebase.database().ref('/Users/' + userId).once('value').then(function(snapshot) {
+					  var qq = snapshot.val().Security;
+						var aa = snapshot.val().Answer;
+						var gg = snapshot.val().Gender;
+						document.getElementById("Security_Question").innerHTML += qq;
+						document.getElementById("Security_Answer").innerHTML += aa;
+						document.getElementById("Gender").innerHTML += gg;
+				});
+
 
 				fbRef.on("value", snap =>{
 		      try
@@ -48,12 +59,13 @@
 		      {
 		        //no availability was entered yet
 		      }
-		      var style = snap.child("Style").val()
-		      var gender = snap.child("Gender").val()
+		      //var style = snap.child("Style").val()
+		      //var gender = snap.child("Gender").val()
 	    	});
 
-	    fbSecurityQ = user.security;
-	    fbSecurityA = user.answer;
+			// not sure if these work but no longer needed
+	    //fbSecurityQ = user.security;
+	    //fbSecurityA = user.answer;
 	  	}
 		})
 
