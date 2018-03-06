@@ -12,70 +12,143 @@
   firebase.initializeApp(config);
 
 
+
+  /*
+    page is not connecting to html, not sure why
+    check closing brackets and paranthesis
+
+    ANSWER: can't have multiple js files with db config for one html
+  */
+
+
+
   const btnSubmit = document.getElementById("btnSubmit");
   const day = document.getElementById("daysOfWeek");
   const hour = document.getElementById("hour");
   const ampm = document.getElementById("timeOfDay");
 
-  var fbRef = firebase.database().ref()
+  // reference to save data must be set globally
+  var fbRef = firebase.database().ref().child('Users');
 
-  btnSubmit.addEventListener('click', e =>
-  {
+
+  btnSubmit.addEventListener('click', e => {
+
 
 	  // make same as mobile app
-	  if(ampm == pm) //if(ampm.value == "PM") this should work
-	  {
-		  switch(hour) {
-		      case 12:
-		          hour = 12;
-		          break;
+
+    /* can't use hour.value because it will change the value in dropdown box,
+       if out of range it will be blank,
+       need to create new variable */
+
+
+    // var.value are stored as strings, this cause comparison problems
+    var hourMT = parseInt(hour.value);
+
+
+	  if(ampm.value == "PM") {
+
+		  switch(hourMT) {
+
 		      case 1:
-		          hour = 13;
+		          hourMT = 13;
 		          break;
+
 		      case 2:
-		          hour = 14;
+		          hourMT = 14;
 		          break;
+
 		      case 3:
-		          hour = 15
+		          hourMT = 15;
 		          break;
+
 		      case 4:
-		          hour = 16;
+		          hourMT = 16;
 		          break;
+
 		      case 5:
-		          hour = 17;
+		          hourMT = 17;
 		          break;
+
 		      case 6:
-		          hour = 18;
+		          hourMT = 18;
 		          break;
+
 		      case 7:
-		          hour = 19;
+		          hourMT = 19;
 		          break;
+
 		      case 8:
-		          hour = 20;
+		          hourMT = 20;
 		          break;
+
 		      case 9:
-		          hour = 21
+		          hourMT = 21;
 		          break;
+
 		      case 10:
-		          hour = 22;
+		          hourMT = 22;
 		          break;
+
 		      case 11:
-		          hour = 23;
+		          hourMT = 23;
 		          break;
-
 		  }
-	  }
-	      var uidPERM = firebaseUser.uid;
 
-		  var availabilities = fbRef.child(uidPERM).child("Availability").val()
-		  var availabilities = availabilities + "," + day + " " + hour + " " + ampm + " ";
-		  fbRef.child(uidPERM).child("Availability").updates(availabilities);
-	      fbRef.child(day).child(hour).child(uidPERM).set({
-	        // using .value only works here not at var initialization
-	        Email: txtEmail.value,
-			Gender: //these are supposed to be global vars created in main
-			Style: //these are supposed to be global vars created in main
-	        });
-	}
-  });
+      console.log(day.value + " " + hour.value + " " + ampm.value);
+      console.log("hourMT is equal to " + hourMT);
+
+	  }
+
+
+    var user = firebase.auth().currentUser;
+    var userEmail = user.email;
+    var userUid = user.uid;
+
+
+    // FIX!
+    /* style and gender are being declared but not outside of the snapshot */
+    var style;
+    var gender;
+
+    firebase.database().ref().child('Users').child(userUid).once('value').then(function(snapshot) {
+        style = snapshot.val().Preferences.Style;
+        gender = snapshot.val().Gender;
+    });
+
+
+
+	}); // end of button listener
+
+  //displays list of availability
+  function makeUL()
+  {
+    //http://jsfiddle.net/minitech/sTLbj/4/
+    var availability
+
+    firebase.database().ref().child('Users').child(userUid).once('value').then(function(snapshot) {
+        availability = snapshot.val().Availability;
+    });
+
+    var array = availability.split(",").map(Text);
+
+      var a = '<ul>',   //start of list
+          b = '</ul>',  //end of list
+          m = [];       //stuff in list
+
+      // Right now, this loop only works with one
+      // explicitly specified array (options[0] aka 'set0')
+      for (i = 0; i < array.length; i += 1){
+          m[i] = '<li>' + array[i] + '</li>';
+      }
+
+      document.getElementById('foo').innerHTML = a + m + b;
+  }
+
+
+
+
+
+// JT added code @ 7:36 try something like this for dynamically building the list
+
+
 } ());
