@@ -119,6 +119,36 @@
 
 	}); // end of button listener
 
+  //displays list of availability
+  function makeUL()
+  {
+    //http://jsfiddle.net/minitech/sTLbj/4/
+    var availability
+
+    firebase.database().ref().child('Users').child(userUid).once('value').then(function(snapshot) {
+        availability = snapshot.val().Availability;
+    });
+
+    var array = availability.split(",").map(Text);
+
+      var a = '<ul>',   //start of list
+          b = '</ul>',  //end of list
+          m = [];       //stuff in list
+
+      // Right now, this loop only works with one
+      // explicitly specified array (options[0] aka 'set0')
+      for (i = 0; i < array.length; i += 1){
+          m[i] = '<li>' + array[i] + '</li>';
+      }
+
+      document.getElementById('foo').innerHTML = a + m + b;
+  }
+
+
+
+
+
+// JT added code @ 7:36 try something like this for dynamically building the list
 
 
 } ());
