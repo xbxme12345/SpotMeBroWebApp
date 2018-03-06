@@ -11,17 +11,23 @@
   };
   firebase.initializeApp(config);
 
+
+
+  const btnSubmitPref = document.getElementById("submitPref");
+
   var fbRef = firebase.database().ref().child('Users');
+
+
+  btnSubmitPref.addEventListener('click', e => {
+    
+  });
+
+
 
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
-      /* // commented out to avoid error in console
-      var uidPERM = firebaseUser.uid;
-      var currentUser = firebaseUser.uid;
-  	  var gender = fbRef.child(uidPERM).child("Gender").val();
-  	  var pref_gender = fbRef.child(uidPERM).child("Preferences").child("Preferred_Gender").val();
-  	  var style = fbRef.child(uidPERM).child("Preferences").child("Style").val();
-	  //assign as global vars */
+
+
 
     } else {
       // also onclick functions for logout button in html file
