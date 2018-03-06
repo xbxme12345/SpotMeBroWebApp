@@ -43,7 +43,7 @@ firebase.initializeApp(config);
   const submitAnswer = document.getElementById("submitSecurityAnswer");
   const resetPasswod = document.getElementById("btnResetPasswordSubmit");
 
-  //Add login event
+  //Login event listener
   btnLogin.addEventListener('click', e => {
     //Get Email and password
     const email = txtEmail.value;
@@ -54,7 +54,7 @@ firebase.initializeApp(config);
     promise.catch(e => console.log(e.message));
   })
 
-  //Add Signup event
+  //Signup event listener
   btnSignUp.addEventListener('click', e => {
     //Get signup information
     const email = txtEmail.value;
@@ -77,14 +77,80 @@ firebase.initializeApp(config);
     }
   });
 
-  //Add Signout event
+  //Signout event listener
   btnSignOut.addEventListener('click', e => {
     firebase.auth().signOut();
   })
 
-  //Add Reset Password event:
+  //Add Reset Password event listener: (Version #1)
   //Submitting your email
-  btnSubmitEmail.addEventListener('click', e => {
+  window.onload = function(){
+    const btnEmail = document.getElementById("btnSubmitEmail");
+    btnEmail.addEventListener('click', e =>{
+      const fbEmail = user.email;
+      const subEmail = submitEmail.value;
+
+      if(checkEmail(subEmail) == true){
+        var fbSecurityQ = user.security;
+        document.getElementById("securityQuestion").innerHTML = fbSecurityQ;
+      }
+      else {
+        alert(subEmail + "does not exist");
+      }
+    });
+  }
+
+  //Event listener when submit email for password reset is clicked
+  //(Version #2)
+  btnEmail.addEventListener('click', function(){
+    const fbEmail = user.email;
+    const subEmail = submitEmail.value;
+    const fbSecurityQ = user.Security;
+
+    const subAnswer = submitSecurityAnswer.value;
+    const fbSecurityA = user.Answer;
+
+    if (checkEmail(fbEmail, subEmail) == true){
+      //If provided email is correct:
+      //Post the user's security question to answer
+      document.getElementById("securityQuestion").innerHTML = fbSecurityQ;
+
+      //Event listener when submit reset password is clicked
+      btnResetPasswordSubmit.addEventListener('click', function(){
+        if(checkAnswer(fbSecurityA, subAnswer) == true){
+          //If security answer is correct:
+          //Sent reset password email to user
+
+        }
+      })
+    } else {
+
+    }
+  })
+
+  //Function to check if user's submitted email matches
+  //with the user's email stored in firebase
+  function checkEmail(fbEmail, subEmail){
+    if(fbEmail == subEmail){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  //Function to check if the user's submitted security question
+  //answer matches with the answer stored in firebase
+  function checkAnswer(fbAnswer, subAnswer){
+    if(fbAnswer == subAnswer){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  /*btnSubmitEmail.addEventListener('click', e => {
     const fbEmail = user.email;
     const subEmail = submitEmail.value;
 
@@ -96,7 +162,7 @@ firebase.initializeApp(config);
       alert(subEmail + "does not exist");
     }
 
-    /*ref.on("value", getData, errData);
+    ref.on("value", getData, errData);
 
     function getData(data){
       console.log(data.val());
@@ -124,12 +190,10 @@ firebase.initializeApp(config);
         alert(errorMessage);
       }
     })
-    */
-  })
 
-  btnSubmit
+  })*/
 
-  //Add realtime listener
+  //Realtime listener
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser){
       console.log(firebaseUser);
@@ -138,7 +202,7 @@ firebase.initializeApp(config);
     }
   })
 
-
+  //Realtime listener
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
       // if proper user logged in, get their hashed id, pass it through

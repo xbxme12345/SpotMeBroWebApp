@@ -28,7 +28,7 @@
 		</div>
 	</div>
 
-	<script>
+	<script type="text/javascript">
 		// reference to save data must be set globally
 		var fbRef = firebase.database().ref().child('Users');
 
@@ -47,6 +47,7 @@
 		      catch(err)
 		      {
 		        //no availability was entered yet
+						alert("No availability has been entered");
 		      }
 		      var style = snap.child("Style").val()
 		      var gender = snap.child("Gender").val()

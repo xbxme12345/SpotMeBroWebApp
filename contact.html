@@ -1,14 +1,15 @@
-<head>
+<!DOCTYPE html>
+<html>
 <head>
   <title>Contact Us</title>
-  <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-  <script src="mainpage.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+  <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script type="text/javascript" src="mainpage.js"></script>
   <link rel="stylesheet" type="text/css" href="contact.css">
 </head>
 <body>
   <div class="container">
-    <nav class="btn-group">
+    <div class="btn-group">
       <button><a href="mainpage.html"><strong>Home Page</strong></a></button>
       <button><a href="about.html"><strong>About Us</strong></a></button>
       <button><a href="matchespage.html"><strong>Go to your Matches</strong></a></button>
@@ -17,7 +18,7 @@
       <button><a href="availability.html"><strong>Select your Availability</strong></a></button>
       <button><a href="contact.html"><strong>Contact Us</strong></a></button>
       <button id="btnSignOut" onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
-    </nav>
+    </div>
     <div id="contactContainer">
       <h1>Contact Us</h1>
       <div id="contact">
@@ -27,4 +28,4 @@
     </div>
   </div>
 </body>
-</head>
+</html>
