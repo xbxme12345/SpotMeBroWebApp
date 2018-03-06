@@ -29,6 +29,7 @@
 
   // reference to save data must be set globally
   var fbRef = firebase.database().ref().child('Users');
+  var fbRefAvail = firebase.database().ref();
 
 
   btnSubmit.addEventListener('click', e => {
@@ -102,19 +103,30 @@
 
     var user = firebase.auth().currentUser;
     var userEmail = user.email;
-    var userUid = user.uid;
+    var userId = user.uid;
 
 
-    // FIX!
-    /* style and gender are being declared but not outside of the snapshot */
+    // MUST FIX!
+    /* style and gender are being declared outside of the snapshot but can't be accessed */
     var style;
     var gender;
 
-    firebase.database().ref().child('Users').child(userUid).once('value').then(function(snapshot) {
+    firebase.database().ref().child('Users').child(userId).once('value').then(function(snapshot) {
+
+        /* issues accessing these snap values outside of block,
+        quick work around is to do all data processing inside func block */
         style = snapshot.val().Preferences.Style;
         gender = snapshot.val().Gender;
-    });
 
+        // creates the new availability entry
+        fbRefAvail.child(day.value).child(hourMT).child(userId).set({
+          Gender: gender,
+          Style: style,
+          Email: userEmail
+        });
+        alert("Availability has been entered for " + day.value + " " + hour.value + ampm.value + " (" + hourMT + ")");
+      });
+      // cannot access snap values outside of brackets even if declared outside block
 
 
 	}); // end of button listener
