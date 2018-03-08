@@ -64,6 +64,61 @@
 		</div>
 	</div>
 
+	<script>
+	function deleteEntry(k, userId) {
+
+		console.log("k is " + k);
+		//console.log("uidPERM is " + uidPERM);
+
+
+
+		firebase.auth().onAuthStateChanged(user => {
+	    if(user){
+				alert("user is mfing " + user.id);
+			}
+		})
+
+
+
+
+
+
+		var allCurrentTimesArr = document.getElementsByClassName("availEntries");
+
+		var updatedEntryString = ""; // reads as undefined if I don't specify it's a string
+
+		// this shows I have all the info I need for the entry I want to delete
+		alert("i wanna get rid of --> " + allCurrentTimesArr[k].id + " with value ==== " + allCurrentTimesArr[k].innerText);
+
+
+		for (var i = 0; i < allCurrentTimesArr.length; i++) {
+			if (i == k) {
+
+			} else {
+				// add entry to string that will be used for updating availability section under user
+				updatedEntryString += allCurrentTimesArr[i].innerText + ", ";
+			}
+		}
+
+
+		console.log("new list is   " + updatedEntryString);
+
+		/* I have my new string that will be used to update firebase without the clicked entry
+		 	need to call firebase now to update Availability field */
+
+
+		//var fbRef = firebase.database().ref().child('Users');
+
+
+		/*
+		fbRef.child(userId).update({
+			Availability: availString
+		}); */
+
+
+
+  }
+	</script>
 
 	<script src="availability.js"></script>
 

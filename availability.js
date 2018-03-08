@@ -38,10 +38,13 @@
 
   firebase.auth().onAuthStateChanged(user => {
     if(user){
+
       var uidPERM = user.uid;
+      uidPERM = uidPERM.toString();
       var availInFb;
 
 
+      alert("in js file the uidPERM is " + uidPERM);
 
 
       // still can't get access to outside of block
@@ -55,8 +58,6 @@
 
         /* implement sorting algo to put in day of week order then chrono order */
 
-        var click = "onclick=\"alert(\"clicked it!\")\"";
-
 
         for (var i = 0; i < len; i++) {
 
@@ -64,7 +65,7 @@
             document.getElementById("availP").innerHTML += "<ul></br>";
           }
 
-          document.getElementById("availP").innerHTML += "<li" + " id=\"item" + i + "\">" + str[i] + "</li></br>";
+          document.getElementById("availP").innerHTML += "<li" + " class=\"availEntries\" id=\"item" + i + "\" onclick=\"deleteEntry(" + i + ", " + uidPERM + ")\">" + str[i] + "</li></br>";
         }
         document.getElementById("availP").innerHTML += "</ul>";
 
@@ -96,54 +97,56 @@
     var hourMT = parseInt(hour.value);
 
 
-	  if(ampm.value == "PM") {
+    if (ampm.value == "AM" && hourMT == 12) {
+      hourMT = 0;
+    } else if(ampm.value == "PM") {
 
-		  switch(hourMT) {
+  		  switch(hourMT) {
 
-		      case 1:
-		          hourMT = 13;
-		          break;
+  		      case 1:
+  		          hourMT = 13;
+  		          break;
 
-		      case 2:
-		          hourMT = 14;
-		          break;
+  		      case 2:
+  		          hourMT = 14;
+  		          break;
 
-		      case 3:
-		          hourMT = 15;
-		          break;
+  		      case 3:
+  		          hourMT = 15;
+  		          break;
 
-		      case 4:
-		          hourMT = 16;
-		          break;
+  		      case 4:
+  		          hourMT = 16;
+  		          break;
 
-		      case 5:
-		          hourMT = 17;
-		          break;
+  		      case 5:
+  		          hourMT = 17;
+  		          break;
 
-		      case 6:
-		          hourMT = 18;
-		          break;
+  		      case 6:
+  		          hourMT = 18;
+  		          break;
 
-		      case 7:
-		          hourMT = 19;
-		          break;
+  		      case 7:
+  		          hourMT = 19;
+  		          break;
 
-		      case 8:
-		          hourMT = 20;
-		          break;
+  		      case 8:
+  		          hourMT = 20;
+  		          break;
 
-		      case 9:
-		          hourMT = 21;
-		          break;
+  		      case 9:
+  		          hourMT = 21;
+  		          break;
 
-		      case 10:
-		          hourMT = 22;
-		          break;
+  		      case 10:
+  		          hourMT = 22;
+  		          break;
 
-		      case 11:
-		          hourMT = 23;
-		          break;
-		  }
+  		      case 11:
+  		          hourMT = 23;
+  		          break;
+  		  }
 
       //console.log(day.value + " " + hour.value + " " + ampm.value);
       //console.log("hourMT is equal to " + hourMT);
