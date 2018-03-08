@@ -18,7 +18,13 @@
     var answerInput = document.getElementById("submitSecurityAnswer").value;
 
     btnSubmitEmail.addEventListener('click', e => {
-      var queryEmail = firebase.database().ref("Users").orderByKey();
+      var queryEmail = firebase.database().ref().child('Users');
+      queryEmail.once('value', function (snap){
+        snap.forEach(function (childSnap){
+          console.log('user', childSnap.val());
+        });
+      });
+      /*
       queryEmail.once("value").then(function(snapshot)){
         snapshot.forEach(function(childSnapshot)){
           var key = childSnapshot.key;
@@ -31,11 +37,11 @@
       }
 
       if(emailInput == email_val){
-        document.getElementById("securityQuestion").innerHTML = securityQuestion_val;
+        document.getElementById("securityQuestion").innerHTML += securityQuestion_val;
       }
       else{
         alert("This email does not exist!");
-      }
+      }*/
     })
 
     btnResetPasswordSubmit.addEventListener('click', e => {
