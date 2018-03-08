@@ -56,8 +56,11 @@
       /* using .value only works here not at var initialization */
       var uidPERM = firebaseUser.uid;
 
+      /* added Availability as an empty string because if you don't it will be
+        read as null and causes problems later when the user inputs first avail time */
       fbRef.child(uidPERM).set({
         Answer: secA.value,
+        Availability: "",
         Email: txtEmail.value,
         Gender: gender.value,
         Security: secQ.value,
