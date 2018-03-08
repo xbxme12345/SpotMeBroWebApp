@@ -20,9 +20,8 @@ nav button{
 .btn-group button:hover{
   background-color: #D3D3D3;
 }
-a {
-  text-decoration: none;
-}
+
+
 #availability{
   width: 450px;
   padding: 30px;
@@ -31,6 +30,7 @@ a {
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
 }
+
 #availability h1 {
   background: #3399ff;
   padding: 20px 30px 15px 30px;
@@ -42,12 +42,14 @@ a {
   border: 1px solid #257C9E;
   text-align: center;
 }
+
 #availability #selectDay, #selectHour, #selectTimeOfDay{
   display: inline-block;
   padding-bottom: 20px;
   border-radius: 6px;
   margin-bottom: 15px:
 }
+
 #availability #daysOfWeek,
 #availability #hour,
 #availability #timeOfDay {
@@ -58,6 +60,7 @@ a {
   border: 2px solid #fff;
   box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
 }
+
 #availability #button #btnSubmit{
   background: #3399ff;
   padding: 8px 20px 8px 20px;

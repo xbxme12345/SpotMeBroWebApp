@@ -72,7 +72,6 @@
 
       // passes hashed id as variable in URL
       window.location = "mainpage.html?uidPerm="+uidPERM;
-      document.getElementById("mainpageh1").innerHTML = uidPERM;
     } else {
       console.log('not logged in');
     }

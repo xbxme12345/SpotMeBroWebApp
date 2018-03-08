@@ -1,32 +1,32 @@
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+  <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   <link rel="stylesheet" type="text/css" href="mainpage.css">
-  <script src="mainpage.js"></script>
+  <script type="text/javascript" src="mainpage.js"></script>
   <title>SpotMeBro - Main Page</title>
 </head>
 <body>
   <div class="container">
     <h1>Welcome to SpotMeBro!</h1>
-
     <section>
       <img class="mySlides" src="crossfit.jpg" style="width:100%; height:500px">
       <img class="mySlides" src="powerlifting.jpg" style="width:100%; height:500px">
       <img class="mySlides" src="cardio.jpg" style="width:100%; height:500px">
     </section>
 
-    <nav class="btn-group">
-      <button><a href="mainpage.html"><strong>Home Page</strong></a></button>
-      <button><a href="about.html"><strong>About Us</strong></a></button>
-      <button><a href="matchespage.html"><strong>Go to your Matches</strong></a></button>
-      <button><a href="preferenceEditor.html"><strong>Go to your Preference Editor</strong></a></button>
-      <button><a href="profilepage.html"><strong>Go to your Profile</strong></a></button>
-      <button><a href="availability.html"><strong>Select your Availability</strong></a></button>
-      <button><a href="contact.html"><strong>Contact Us</strong></a></button>
+    <div class="btn-group">
+      <button onclick="location.href='mainpage.html'"><strong>Home Page</strong></a></button>
+      <button onclick="location.href='about.html'"><strong>About Us</strong></button>
+      <button onclick="location.href='matchespage.html'"><strong>Go to your Matches</strong></button>
+      <button onclick="location.href='preferenceEditor.html'"><strong>Go to your Preference Editor</strong></button>
+      <button onclick="location.href='profilepage.html'"><strong>Go to your Profile</strong></button>
+      <button onclick="location.href='availability.html'"><strong>Select your Availability</strong></button>
+      <button onclick="location.href='contact.html'"><strong>Contact Us</strong></button>
       <button id="btnSignOut" onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
-    </nav>
+    </div>
   </div>
 
   <script>
@@ -34,16 +34,16 @@
   carousel();
 
   function carousel() {
-      var i;
-      var x = document.getElementsByClassName("mySlides");
-      for (i = 0; i < x.length; i++) {
-         x[i].style.display = "none";
-      }
-      myIndex++;
-      if (myIndex > x.length) {myIndex = 1}
-      x[myIndex-1].style.display = "block";
-      setTimeout(carousel, 3000);
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
     }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}
+    x[myIndex-1].style.display = "block";
+    setTimeout(carousel, 3000);
+  }
   </script>
 
 </body>
