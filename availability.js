@@ -31,6 +31,57 @@
   var fbRef = firebase.database().ref().child('Users');
   var fbRefAvail = firebase.database().ref();
 
+  var availString = "";
+
+
+
+
+  firebase.auth().onAuthStateChanged(user => {
+    if(user){
+
+      var uidPERM = user.uid;
+      uidPERM = uidPERM.toString();
+      var availInFb;
+
+
+      alert("in js file the uidPERM is " + uidPERM);
+
+
+      // still can't get access to outside of block
+      fbRef.child(user.uid).child("Availability").on("value", function(snapshot) {
+        availString = snapshot.val();
+
+
+        var str = availString.split(",");
+        str.pop(); // to remove empty end entry because there is an extra comma at end
+        var len = str.length;
+
+        /* implement sorting algo to put in day of week order then chrono order */
+
+
+        for (var i = 0; i < len; i++) {
+
+          if (i == 0) {
+            document.getElementById("availP").innerHTML += "<ul></br>";
+          }
+
+          document.getElementById("availP").innerHTML += "<li" + " class=\"availEntries\" id=\"item" + i + "\" onclick=\"deleteEntry(" + i + ", " + uidPERM + ")\">" + str[i] + "</li></br>";
+        }
+        document.getElementById("availP").innerHTML += "</ul>";
+
+
+
+      });
+
+    }
+  })
+
+  /* Everytime page loads need to retreive the current Availability string in database, availInFb,
+    and assign it to availString to maintain data flow or else everytime the loads loads it will be wiped */
+
+
+
+
 
   btnSubmit.addEventListener('click', e => {
 
@@ -46,57 +97,59 @@
     var hourMT = parseInt(hour.value);
 
 
-	  if(ampm.value == "PM") {
+    if (ampm.value == "AM" && hourMT == 12) {
+      hourMT = 0;
+    } else if(ampm.value == "PM") {
 
-		  switch(hourMT) {
+  		  switch(hourMT) {
 
-		      case 1:
-		          hourMT = 13;
-		          break;
+  		      case 1:
+  		          hourMT = 13;
+  		          break;
 
-		      case 2:
-		          hourMT = 14;
-		          break;
+  		      case 2:
+  		          hourMT = 14;
+  		          break;
 
-		      case 3:
-		          hourMT = 15;
-		          break;
+  		      case 3:
+  		          hourMT = 15;
+  		          break;
 
-		      case 4:
-		          hourMT = 16;
-		          break;
+  		      case 4:
+  		          hourMT = 16;
+  		          break;
 
-		      case 5:
-		          hourMT = 17;
-		          break;
+  		      case 5:
+  		          hourMT = 17;
+  		          break;
 
-		      case 6:
-		          hourMT = 18;
-		          break;
+  		      case 6:
+  		          hourMT = 18;
+  		          break;
 
-		      case 7:
-		          hourMT = 19;
-		          break;
+  		      case 7:
+  		          hourMT = 19;
+  		          break;
 
-		      case 8:
-		          hourMT = 20;
-		          break;
+  		      case 8:
+  		          hourMT = 20;
+  		          break;
 
-		      case 9:
-		          hourMT = 21;
-		          break;
+  		      case 9:
+  		          hourMT = 21;
+  		          break;
 
-		      case 10:
-		          hourMT = 22;
-		          break;
+  		      case 10:
+  		          hourMT = 22;
+  		          break;
 
-		      case 11:
-		          hourMT = 23;
-		          break;
-		  }
+  		      case 11:
+  		          hourMT = 23;
+  		          break;
+  		  }
 
-      console.log(day.value + " " + hour.value + " " + ampm.value);
-      console.log("hourMT is equal to " + hourMT);
+      //console.log(day.value + " " + hour.value + " " + ampm.value);
+      //console.log("hourMT is equal to " + hourMT);
 
 	  }
 
@@ -105,9 +158,10 @@
     var userEmail = user.email;
     var userId = user.uid;
 
+    availString += day.value + " " + hourMT + ", ";
 
-    // MUST FIX!
-    /* style and gender are being declared outside of the snapshot but can't be accessed */
+
+
     var style;
     var gender;
 
@@ -118,16 +172,30 @@
         style = snapshot.val().Preferences.Style;
         gender = snapshot.val().Gender;
 
-        // creates the new availability entry
+        // creates the new availability entry by day of week
         fbRefAvail.child(day.value).child(hourMT).child(userId).set({
           Gender: gender,
           Style: style,
           Email: userEmail
         });
+
+
+
+        /* says null right before first entry MUST FIX! */
+        // update availability in db under uid
+        fbRef.child(userId).update({
+          Availability: availString
+        });
+
+
+
         alert("Availability has been entered for " + day.value + " " + hour.value + ampm.value + " (" + hourMT + ")");
+        alert(availString);
       });
       // cannot access snap values outside of brackets even if declared outside block
 
+      // need to do this to "reset" listing or else would be redundant
+      document.getElementById("availP").innerHTML = "";
 
 	}); // end of button listener
 
