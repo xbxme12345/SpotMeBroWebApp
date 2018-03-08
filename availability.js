@@ -48,7 +48,7 @@
       fbRef.child(user.uid).child("Availability").on("value", function(snapshot) {
         availString = snapshot.val();
 
-        console.log(availString);
+        //console.log(availString);
 
         var str = availString.split(",");
         str.pop(); // to remove empty end entry because there is an extra comma at end
@@ -187,8 +187,8 @@
 
 
 
-        alert("Availability has been entered for " + day.value + " " + hour.value + ampm.value + " (" + hourMT + ")");
-        console.log(availString);
+        //alert("Availability has been entered for " + day.value + " " + hour.value + ampm.value + " (" + hourMT + ")");
+        //console.log(availString);
       });
       // cannot access snap values outside of brackets even if declared outside block
 
