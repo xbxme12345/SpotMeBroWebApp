@@ -80,8 +80,7 @@
 
 
 
-
-  btnSubmit.addEventListener('click', e => {
+function submitTime(){
 
 
 	  // make same as mobile app
@@ -195,7 +194,8 @@
       // need to do this to "reset" listing or else would be redundant
       document.getElementById("availP").innerHTML = "";
 
-	}); // end of button listener
+ // end of button listener
+}
 
   //displays list of availability
   function makeUL()
