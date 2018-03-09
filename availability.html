@@ -60,62 +60,59 @@
 				<br/>
 			<div id="button">
 				<button id="btnSubmit" type="submit">Submit</button>
+			</br></br><i>If you wish to delete a time, simply click on it!</i>
 			</div>
 				<p id="availP"></p>
 		</div>
 	</div>
 
 	<script>
-	function deleteEntry(k, userId) {
-
-		console.log("k is " + k);
-		//console.log("uidPERM is " + uidPERM);
-
-
-
-		firebase.auth().onAuthStateChanged(user => {
-	    if(user){
-				alert("user is mfing " + user.id);
-			}
-		})
-
-
-
-
+	function deleteEntry(k) {
 
 
 		var allCurrentTimesArr = document.getElementsByClassName("availEntries");
 
 		var updatedEntryString = ""; // reads as undefined if I don't specify it's a string
 
-		// this shows I have all the info I need for the entry I want to delete
-		alert("i wanna get rid of --> " + allCurrentTimesArr[k].id + " with value ==== " + allCurrentTimesArr[k].innerText);
+		var entryToBeDeleted = "";
 
 
 		for (var i = 0; i < allCurrentTimesArr.length; i++) {
 			if (i == k) {
-
+				entryToBeDeleted = allCurrentTimesArr[i].innerText;
 			} else {
 				// add entry to string that will be used for updating availability section under user
 				updatedEntryString += allCurrentTimesArr[i].innerText + ", ";
 			}
 		}
 
+		entryToBeDeleted = entryToBeDeleted.split(" ");
 
-		console.log("new list is   " + updatedEntryString);
+		//console.log("new list is   " + updatedEntryString);
 
 		/* I have my new string that will be used to update firebase without the clicked entry
 		 	need to call firebase now to update Availability field */
 
 
-		//var fbRef = firebase.database().ref().child('Users');
+		var fbRef = firebase.database().ref();
+		var fbRefUsers = firebase.database().ref().child('Users');
+		var fbUid = firebase.auth().currentUser.uid;
 
 
-		/*
-		fbRef.child(userId).update({
-			Availability: availString
-		}); */
+		// delete time entry under day
+		fbRef.child(entryToBeDeleted[0]).child(entryToBeDeleted[1]).child(fbUid).remove();
 
+
+		fbRefUsers.child(fbUid).update({
+			Availability: updatedEntryString
+		});
+
+
+
+		/* Reloads page to avoid the printing of a second list on page with deleted entry,
+		 	by reloading it quickly fixes this problem. Look for another possible solution. */
+		location.reload();
+		/* need to "reset the view of availability times" */
 
 
   }
