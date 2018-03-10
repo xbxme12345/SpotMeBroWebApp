@@ -3,39 +3,6 @@
 	<title>SpotMeBro - Matches</title>
 	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-	<script src="mainpage.js"></script>
-	<script>
-		{
-		  // Initialize Firebase
-		  var config = {
-		    apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
-		    authDomain: "spotmebro-82458.firebaseapp.com",
-		    databaseURL: "https://spotmebro-82458.firebaseio.com",
-		    projectId: "spotmebro-82458",
-		    storageBucket: "spotmebro-82458.appspot.com",
-		    messagingSenderId: "737240148087"
-		  };
-
-		  firebase.initializeApp(config);
-
-		  var fbRef = firebase.database().ref();
-		  var uidPERM = firebaseUser.uid;
-		  var availabilities = fbRef.child(uidPERM).child("Availability").val()
-
-		  times = availabilities.split(",");
-		  for (var k = 0; k < times.length; k++)
-		  {
-			  document.write('<li' + 'value="' + times[k] +'"onclick= "goto(this)">' + 		  times[k] + '</li>');
-		  }
-
-		  // goto page here
-		  function goto(elm) {
-			//pass var x to next page, var x being time
-		    var x = elm.getAttribute('value');
-		    console.log(x);
-		  }
-	}
-	</script>
 	<link rel="stylesheet" type="text/css" href="matchespage.css">
 </head>
 <body>
@@ -55,8 +22,66 @@
 			<h1>Matches</h1>
 			<div id="availabilityList">
 				<p>Availability:</p>
+				<p id="pid"></p>
 			</div>
 		</div>
 	</div>
+
+
+
+
+
+	<script src="matchespage.js"></script>
+
+
+
+	<script>
+
+	const dbRef = firebase.database().ref();
+
+
+	function getMatches(userid, availS) {
+
+
+		availS = availS.split(",");
+		availS.pop(); // get rid of empty end comma
+		// availS is defined exactly how I want
+
+
+		for (var i = 0; i < availS.length; i++) {
+
+			var availS2 = availS[i].split(" ");
+
+			document.getElementById("pid").innerHTML += "<b>" + availS2[0] + " " + availS2[1] + "</b></br>";
+
+			var uidArr = [];
+
+			dbRef.child(availS2[0]).child(availS2[1]).once("value", function(snapshot) {
+				snapshot.forEach(function(child) {
+					uidArr.push(child.val().Email);
+					//console.log(child.key + " : " + child.val().Email);
+
+				});
+
+				for (var k = 0; k < uidArr.length; k++) {
+					document.getElementById("pid").innerHTML += uidArr[k] + "</br>";
+				}
+
+				console.log("uid's in " + availS2[0] + "--" + availS2[1]);
+				console.log(uidArr);
+
+			}); // end of snapshot
+
+		} // end of for loop
+
+
+	} // end of getMatches function
+
+
+
+	</script>
+
+
+
 </body>
 </html>

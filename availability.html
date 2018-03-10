@@ -6,18 +6,6 @@
   <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
   <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 	<script type="text/javascript" src="mainpage.js"></script>
-	<script type="text/javascript">
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
-			authDomain: "spotmebro-82458.firebaseapp.com",
-			databaseURL: "https://spotmebro-82458.firebaseio.com",
-			projectId: "spotmebro-82458",
-			storageBucket: "spotmebro-82458.appspot.com",
-			messagingSenderId: "737240148087"
-		};
-		firebase.initializeApp(config);
-	</script>
 	<link rel="stylesheet" type="text/css" href="availability.css">
 </head>
 <body>
@@ -240,7 +228,7 @@ function submitTime(){
 		var userEmail = user.email;
 		var userId = user.uid;
 
-		availString += day.value + " " + hourMT + " " + ampm.value + ", ";
+		availString += day.value + " " + hourMT + " " + ampm.value + ",";
 
 
 
