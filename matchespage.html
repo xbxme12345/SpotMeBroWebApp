@@ -58,8 +58,14 @@
 
 			dbRef.child(availS2[0]).child(availS2[1]).once("value", function(snapshot) {
 				snapshot.forEach(function(child) {
-					uidArr.push(child.val().Email);
-					//console.log(child.key + " : " + child.val().Email);
+
+					if (child.key == userid){
+
+					} else {
+						uidArr.push(child.val().Email);
+						//console.log(child.key + " : " + child.val().Email);
+					}
+
 
 				});
 
