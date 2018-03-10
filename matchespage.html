@@ -5,7 +5,6 @@
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 	<script src="mainpage.js"></script>
 	<script>
-		{
 		  // Initialize Firebase
 		  var config = {
 		    apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
@@ -17,7 +16,7 @@
 		  };
 
 		  firebase.initializeApp(config);
-
+			/*
 		  var fbRef = firebase.database().ref();
 		  var uidPERM = firebaseUser.uid;
 		  var availabilities = fbRef.child(uidPERM).child("Availability").val()
@@ -33,10 +32,33 @@
 			//pass var x to next page, var x being time
 		    var x = elm.getAttribute('value');
 		    console.log(x);
-		  }
-	}
+		  }*/
 	</script>
 	<link rel="stylesheet" type="text/css" href="matchespage.css">
+	<style>
+		#availabilityList .collapsible {
+			background-color: #3399ff;
+			color: black;
+			cursor: pointer;
+			padding: 18px;
+			width: 100%;
+			border: none;
+			text-align: left;
+			outline: none;
+			font-size: 15px;
+		}
+
+		.active, .collapsible:hover{
+			background-color: #56A0EA;
+		}
+
+		#availabilityList #content {
+			padding; 0 18px;
+			display: none;
+			overflow: hidden;
+			background-color: #F8F8F8;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -54,9 +76,52 @@
 		<div id="matchContainer">
 			<h1>Matches</h1>
 			<div id="availabilityList">
-				<p>Availability:</p>
+				<p><em>Select an availability to see who your matches:</em></p>
 			</div>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+		var fbRef = firebase.database().ref().child('Users');
+		var fbRefAvail = firebase.database().ref();
+		var availString = "";
+
+		firebase.auth().onAuthStateChanged(user => {
+			if(user){
+				var uidPERM = user.uid;
+				fbRef.child(user.uid).child("Availability").on("value", function(snapshot) {
+					availString = snapshot.val();
+					var str = availString.split(",");
+					str.pop();
+					var len = str.length;
+
+					for(var i = 0; i < len; i++){
+						if(i == 0){
+							document.getElementById("availabilityList").innerHTML += "</br>";
+						}
+						document.getElementById("availabilityList").innerHTML += "<button class='collapsible' onclick='displayMatch()'>" + str[i] + "</button></br><div id='content></div>'";
+					}
+				});
+			}
+		})
+
+		function displayMatch() {
+			var coll = document.getElementsByClassName("collapsible");
+	    var i;
+
+	    for (i = 0; i < coll.length; i++) {
+	      coll[i].addEventListener("click", function() {
+	          this.classList.toggle("active");
+	          var content = this.nextElementSibling;
+	          if (content.style.display === "block") {
+	              content.style.display = "none";
+	          } else {
+	              content.style.display = "block";
+	          }
+	      });
+	    }
+		}
+
+	</script>
 </body>
 </html>
