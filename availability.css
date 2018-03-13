@@ -69,3 +69,14 @@ nav button{
   box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
   border: 1px solid #257C9E;
 }
+
+#availability #availP .availEntries {
+  padding: 10px;
+  background: #F8F8F8;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  background-color: #3399ff;
+  list-style-type: none;
+  width: 25%;
+
+}
