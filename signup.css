@@ -18,7 +18,7 @@
   border: 1px solid #257C9E;
 }
 
-.container #userLogin, #genderInfo, #securityInfo, #styleInfo, #preferenceInfo {
+.container #userName, #userLogin, #genderInfo, #securityInfo, #styleInfo, #preferenceInfo {
   padding: 5px;
   background: #F8F8F8;
   border-radius: 6px;
