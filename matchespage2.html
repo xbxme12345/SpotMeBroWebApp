@@ -21,7 +21,7 @@
 		<div id="matchContainer">
 			<h1>Matches</h1>
 			<div id="availabilityList">
-				<p>Click on an availability to view matches:</p>
+				<p id="pheading">Users available at </p>
 				<p id="pid"></p>
 			</div>
 		</div>
@@ -48,13 +48,36 @@
 		// availS is defined exactly how I want
 
 
-		for (var i = 0; i < availS.length; i++) {
-
-			var availS2 = availS[i].split(" ");
-			document.getElementById("pid").innerHTML += "<b><a href=\"matchespage2.html?time="+availS2[0]+"_"+availS2[1]+"\">" + availS2[0] + " " + availS2[1] + "</a></b></br>";
 
 
-		} // end of for loop
+      var clickedTime = window.location.href;
+      clickedTime = clickedTime.split("?");
+      clickedTime = clickedTime[1].split("=");
+      clickedTime = clickedTime[1].split("_");
+
+      document.getElementById("pheading").innerHTML += clickedTime[0] + " " + clickedTime[1];
+
+			var emailArr = [];
+
+			dbRef.child(clickedTime[0]).child(clickedTime[1]).once("value", function(snapshot) {
+				snapshot.forEach(function(child) {
+
+					if (child.key == userid){
+
+					} else {
+						emailArr.push(child.val().Email);
+						//console.log(child.key + " : " + child.val().Email);
+					}
+
+
+				});
+
+				for (var k = 0; k < emailArr.length; k++) {
+					document.getElementById("pid").innerHTML += emailArr[k] + "</br>";
+				}
+
+
+			}); // end of snapshot
 
 
 	} // end of getMatches function
