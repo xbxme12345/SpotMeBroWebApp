@@ -4,69 +4,7 @@
 	<title>SpotMeBro - Matches</title>
 	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-	<script src="mainpage.js"></script>
-	<script>
-		  // Initialize Firebase
-		  var config = {
-		    apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
-		    authDomain: "spotmebro-82458.firebaseapp.com",
-		    databaseURL: "https://spotmebro-82458.firebaseio.com",
-		    projectId: "spotmebro-82458",
-		    storageBucket: "spotmebro-82458.appspot.com",
-		    messagingSenderId: "737240148087"
-		  };
-
-		  firebase.initializeApp(config);
-			/*
-		  var fbRef = firebase.database().ref();
-		  var uidPERM = firebaseUser.uid;
-		  var availabilities = fbRef.child(uidPERM).child("Availability").val()
-
-		  times = availabilities.split(",");
-		  for (var k = 0; k < times.length; k++)
-		  {
-			  document.write('<li' + 'value="' + times[k] +'"onclick= "goto(this)">' + 		  times[k] + '</li>');
-		  }
-
-		  // goto page here
-		  function goto(elm) {
-			//pass var x to next page, var x being time
-		    var x = elm.getAttribute('value');
-		    console.log(x);
-		  }*/
-	</script>
 	<link rel="stylesheet" type="text/css" href="matchespage.css">
-	<!--style>
-		.container #matchSection{
-			padding: 5px;
-	    background: #F8F8F8;
-	    border-radius: 6px;
-	    margin-bottom: 15px;
-		}
-
-		.container .collapsible {
-			background-color: #3399ff;
-			color: black;
-			cursor: pointer;
-			padding: 18px;
-			width: 100%;
-			border: none;
-			text-align: left;
-			outline: none;
-			font-size: 15px;
-		}
-
-		.active, .collapsible:hover{
-			background-color: #56A0EA;
-		}
-
-		.container #content {
-			padding; 0 18px;
-			display: none;
-			overflow: hidden;
-			background-color: #F8F8F8;
-		}
-	</style>-->
 </head>
 <body>
 	<nav class="btn-group">
@@ -76,6 +14,7 @@
 		<button onclick="location.href='preferenceEditor.html'"><strong>Go to your Preference Editor</strong></button>
 		<button onclick="location.href='profilepage.html'"><strong>Go to your Profile</strong></button>
 		<button onclick="location.href='availability.html'"><strong>Select your Availability</strong></button>
+		<button onclick="location.href='conversations.html'"><strong>Conversations</strong></button>
 		<button onclick="location.href='contact.html'"><strong>Contact Us</strong></button>
 		<button onclick="location.href='help.html'"><strong>Help</strong></button>
 		<button id="btnSignOut" onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
@@ -83,104 +22,26 @@
 	<div class="container">
 		<h1>Matches</h1>
 		<div id="matchSection">
-			<p><em>Select an availability to see who your matches:</em></p>
+			<p><em>Select an availability to view matches:</em></p>
+			<p id="pid"></p>
 		</div>
 	</div>
 
-	<script type="text/javascript">
+	<script src="matchespage.js"></script>
+	<script>
 
-		var fbRef = firebase.database().ref().child('Users');
-		var fbRefAvail = firebase.database().ref();
-		var availString = "";
+	const dbRef = firebase.database().ref();
 
-		var userEmail;
-		var userGender;
-		var userAvailability = [];
+	function getMatches(userid, availS) {
+		availS = availS.split(",");
+		availS.pop(); // get rid of empty end comma
+		// availS is defined exactly how I want
 
-		firebase.auth().onAuthStateChanged(user => {
-			if(user){
-				userEmail = user.email;
-				/*userGender = user.gender;
-				userAvailability = user.availability;
-				console.log(userEmail, userGender, userAvailability);*/
-			}
-		})
-
-		firebase.auth().onAuthStateChanged(user => {
-			if(user){
-				var uidPERM = user.uid;
-				fbRef.child(user.uid).child("Availability").on("value", function(snapshot) {
-					availString = snapshot.val();
-					var str = availString.split(",");
-					str.pop();
-					var len = str.length;
-
-					for(var i = 0; i < len; i++){
-						if(i == 0){
-							document.getElementById("matchSection").innerHTML += "</br>";
-						}
-						document.getElementById("matchSection").innerHTML += "<button class='collapsible' onclick='location.href='matchesAvailability.html''>" + str[i] + "</button><br>";
-						document.getElementsByClassName("matchSection").innerHTML += "<div id='content><p>Hello</p></div>'"
-					}
-					matchesList(uidPERM);
-				});
-			}
-		})
-
-		function displayMatch() {
-			var coll = document.getElementsByClassName("collapsible");
-	    var i;
-
-	    for (i = 0; i < coll.length; i++) {
-	      coll[i].addEventListener("click", function() {
-	          this.classList.toggle("active");
-	          var content = this.nextElementSibling;
-	          if (content.style.display === "block") {
-	              content.style.display = "none";
-	          } else {
-	              content.style.display = "block";
-	          }
-	      });
-	    }
-		}
-
-		function matchesList(userId){
-			var matchEmail;
-			var matchGender;
-			var matchAvailability;
-
-			var ref = firebase.database().ref('Users');
-			ref.on('value', matchesData);
-
-			function matchesData(data) {
-				var allData = data.val();
-				var keys = Object.keys(allData);
-
-				for(var i = 0; i < keys.length; i++){
-					var k = keys[i];
-					matchEmail = allData[k].Email;
-					matchGender = allData[k].Gender;
-					matchAvailability = allData[k].Availability;
-					matchAvailability = matchAvailability.split(',');
-
-					console.log(matchEmail, matchGender, matchAvailability);
-					if(userEmail.toLowerCase() === matchEmail.toLowerCase()){
-						k = keys[i + 1];
-						/*for(var m = 0; m < keys.length; i++){
-							var j = keys[i];
-
-						}*/
-					} else if (userEmail.toLowerCase() != matchEmail.toLowerCase()){
-						/*matchGender = allData[k].Gender;
-						matchAvailability = allData[k].Availability;
-						matchAvailability = matchAvailability.split(',');
-						console.log(matchEmail, matchGender, matchAvailability);*/
-					}
-				}
-			}
-
-
-		}
+		for (var i = 0; i < availS.length; i++) {
+			var availS2 = availS[i].split(" ");
+			document.getElementById("pid").innerHTML += "<b><a href=\"matchespage2.html?time="+availS2[0]+"_"+availS2[1]+"\">" + availS2[0] + " " + availS2[1] + "</a></b></br>";
+		} // end of for loop
+	} // end of getMatches function
 
 	</script>
 </body>

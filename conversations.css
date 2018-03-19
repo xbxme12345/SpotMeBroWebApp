@@ -1,4 +1,4 @@
-.btn-group{
+.btn-group {
   position: fixed;
   height: 100%;
   z-index: 1;
@@ -9,7 +9,7 @@
   background-color: #3399ff;
 }
 
-button{
+.btn-group button{
   background-color: #3399ff;
   padding: 20px;
   color: black;
@@ -21,7 +21,7 @@ button{
   background-color: #D3D3D3;
 }
 
-.container {
+#container {
   width: 450px;
   padding: 30px;
   margin: 40px auto;
@@ -30,7 +30,7 @@ button{
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
 }
 
-.container h1{
+#container h1 {
   background: #3399ff;
   padding: 20px 30px 15px 30px;
   margin: -30px -30px 30px -30px;
@@ -42,21 +42,11 @@ button{
   text-align: center;
 }
 
-.container #matchContainer {
-  padding: 5px;
-  background: #F8F8F8;
-  border-radius: 6px;
-  margin-bottom: 15px;
+#container #conversationSection {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #fff;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
 }
-
-a {
-  text-decoration: none;
-}
-
-
-/*.container #matchSection {
-  padding: 5px;
-  background: #F8F8F8;
-  border-radius: 6px;
-  margin-bottom: 15px;
-}*/
