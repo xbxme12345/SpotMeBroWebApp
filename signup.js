@@ -21,11 +21,11 @@
   var secA = document.getElementById("securityAnswer");
   var liftStyle = document.getElementById("style");
   var prefgen = document.getElementById("prefgender");
-  //const btnSignUp = document.getElementById("btnSignUp");
+  const btnSignUp = document.getElementById("btnSignUp");
 
 
   // add sign up event
-  function signUp() {
+  btnSignUp.addEventListener("click", e => {
     // get email and pass
     var email = txtEmail.value;
     var pass = txtPassword.value;
@@ -39,9 +39,10 @@
     else
     {
       console.log('passwords don\'t match');
+      alert("Passwords do not match");
     }
 
-  }
+  });
 
 
 

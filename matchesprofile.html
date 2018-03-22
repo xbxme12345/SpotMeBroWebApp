@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Matches' Profile</title>
+  <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <link rel="stylesheet" type="text/css" href="matchespage.css">
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
+      authDomain: "spotmebro-82458.firebaseapp.com",
+      databaseURL: "https://spotmebro-82458.firebaseio.com",
+      projectId: "spotmebro-82458",
+      storageBucket: "spotmebro-82458.appspot.com",
+      messagingSenderId: "737240148087"
+    };
+    firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+      if (firebaseUser) {
+        /* // commented out to avoid error in console
+        var uidPERM = firebaseUser.uid;
+        var currentUser = firebaseUser.uid;
+    	  var gender = fbRef.child(uidPERM).child("Gender").val();
+    	  var pref_gender = fbRef.child(uidPERM).child("Preferences").child("Preferred_Gender").val();
+    	  var style = fbRef.child(uidPERM).child("Preferences").child("Style").val();
+  	  //assign as global vars */
+
+      } else {
+        // also onclick functions for logout button in html file
+        console.log('not logged in');
+        window.location = "signin.html";
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="btn-group">
+		<button onclick="location.href='mainpage.html'"><strong>Home Page</strong></a></button>
+		<button onclick="location.href='about.html'"><strong>About Us</strong></button>
+		<button onclick="location.href='matchespage.html'"><strong>Go to your Matches</strong></button>
+		<button onclick="location.href='preferenceEditor.html'"><strong>Go to your Preference Editor</strong></button>
+		<button onclick="location.href='profilepage.html'"><strong>Go to your Profile</strong></button>
+		<button onclick="location.href='availability.html'"><strong>Select your Availability</strong></button>
+		<button onclick="location.href='conversations.html'"><strong>Conversations</strong></button>
+		<button onclick="location.href='contact.html'"><strong>Contact Us</strong></button>
+		<button onclick="location.href='help.html'"><strong>Help</strong></button>
+		<button id="btnSignOut" onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
+	</div>
+  <div class="container">
+    <h1>Matches Profile</h1>
+    <div id="matchSection">
+      <p id="Name"></p>
+      <p id="Email"></p>
+      <p id="Gender"></p>
+    </div>
+  </div>
+
+  <script src="matchespage.js"></script>
+  <script>
+    const dbRef = firebase.database().ref();
+
+    function getMatches(userid, availS){
+      availS = availS.split(",");
+      availS.pop();
+
+      var clickedMatchesEmail = window.location.href;
+      clickedMatchesEmail = clickedMatchesEmail.split("?");
+      clickedMatchesEmail = clickedMatchesEmail[1].split("=");
+
+      var arr = [];
+
+      dbRef.child("Users").child(clickedMatchesEmail[0]).child(clickedMatchesEmail[1]).once("value", function(snapshot) {
+        snapshot.forEach(function(child) {
+          if(child.key == userid){
+          } else {
+            arr.push(child.val().Name);
+            arr.push(child.val().Email);
+            arr.push(child.val().Gender);
+          }
+        });
+        for(var k = 0; k < arr.length; k++){
+          if(k == 0){
+            document.getElementById("Name").innerHTML += "Name: " + arr[k];
+          } else if(k == 1) {
+            document.getElementById("Email").innerHTML += "Email: " + arr[k];
+          } else if(k ==2) {
+            document.getElementById("Gender").innerHTML += "Gender: " + arr[k];
+          } else {
+            console.log("Error");
+          }
+        }
+      });
+    }
+
+    /*function getProfile(){
+      var clickedMatchesEmail = window.location.href;
+      clickedMatchesEmail = clickedMatchesEmail.split("?");
+      clickedMatchesEmail = clickedMatchesEmail[1].split("=");
+
+      dbRef.child(clickedMatchesEmail[0]).once("value", function(snapshot) {
+        snapshot.forEach(function(child) {
+          matchName = child.val().Name;
+          matchEmail = child.val().Email;
+          matchGender = child.val().Gender;
+        });
+        document.getElementById("Name").innerHTML += "Name: " + matchName;
+        document.getElementById("Email").innerHTML += "Email: " + matchEmail;
+        document.getElementById("Gender").innerHTML += "Gender: " + matchGender;
+      });
+    }*/
+
+  </script>
+</body>
+</html>
