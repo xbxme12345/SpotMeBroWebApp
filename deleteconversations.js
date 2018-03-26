@@ -42,9 +42,11 @@
 
       var uid = user.uid;
       var availString = "";
+      var name;
 
-      //function to get name, however its done
-      var name = "Jon Tonthat";
+      var userId = firebase.auth().currentUser.uid;
+      firebase.database().ref('/Users/' + userId).once('value').then(function(snapshot) {
+          name = snapshot.val().Name;
 
 /*
       fbRef.child("Messages").once('value',function(snap) {
