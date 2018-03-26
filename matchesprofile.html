@@ -101,7 +101,27 @@
       console.log(nameVal);
       console.log(emailVal);
       console.log(genderVal);
-    }
-  </script>
+
+
+
+      var userId = firebase.auth().currentUser.uid;
+      return firebase.database().ref('/Users/' + userId).once('value').then(function(snapshot) {
+
+        var myname = snapshot.val().Name;
+
+        firebase.database().ref().child("Messages").child(" " + myname + "-" + nameVal).child("MessageList").set({
+           // make like mobile
+        });
+
+      });
+
+
+          /*
+          firebase.database().ref().child("Messages").child(myname + "-" +nameVal).child("MessageList").set({
+             a:"text"
+          }); */
+
+  }
+</script>
 </body>
 </html>
