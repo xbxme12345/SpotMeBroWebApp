@@ -1,5 +1,18 @@
 (function() {
 
+  function snapshotToArray(snapshot) {
+      var returnArr = [];
+
+      snapshot.forEach(function(childSnapshot) {
+          var item = childSnapshot.val();
+          item.key = childSnapshot.key;
+
+          returnArr.push(item);
+      });
+
+      return returnArr;
+  };
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
@@ -33,11 +46,12 @@
       //function to get name, however its done
       var name = "Jon Tonthat";
 
-
+/*
       fbRef.child("Messages").once('value',function(snap) {
           snap.forEach(function(item)
           {
-              var itemName = item.val().key; // <-- check this out 
+              document.getElementById("pid").innerHTML += "</br><a>" + "x" + "</a></br></br>";
+              var itemName = item.val().key; // <-- check this out
               if (itemName.includes(name))
               {
                 var Names = itemName.split("-");
@@ -62,8 +76,47 @@
 
 
           });
+          */
 
-      });
+
+fbRef.child("Messages").once('value',function(snap)
+{
+  var retarr = snapshotToArray(snap)
+  var index;
+  for (index = 0; index <= retarr.length; ++index)
+  {
+      console.log(retarr[index].key);
+      //document.getElementById("pid").innerHTML += "</br><a>" + "x" + "</a></br></br>";
+      var itemName = retarr[index].key; // <-- check this out
+      if (itemName.includes(name))
+      {
+        var Names = itemName.split("-");
+        if (Names[0] == name)
+        {
+
+        }
+        else
+        {
+          document.getElementById("pid").innerHTML += "</br><a>" + Names[0] + "</a></br></br>";
+        }
+
+        if (Names[1] == name)
+        {
+
+        }
+        else
+        {
+          document.getElementById("pid").innerHTML += "</br><a>" + Names[1] + "</a></br></br>";
+        }
+
+      }
+  }
+
+
+
+
+//});
+});
 
 
 
