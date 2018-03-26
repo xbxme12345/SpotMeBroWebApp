@@ -109,7 +109,7 @@
 
         var myname = snapshot.val().Name;
 
-        firebase.database().ref().child("Messages").child(myname + "-" + nameVal).child("MessageList").set({
+        firebase.database().ref().child("Messages").child(" " + myname + "-" + nameVal).child("MessageList").set({
            // make like mobile
         });
 
