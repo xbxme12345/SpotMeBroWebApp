@@ -1,5 +1,4 @@
 (function() {
-
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
@@ -11,19 +10,14 @@
   };
   firebase.initializeApp(config);
 
-
-
   const btnSubmitPref = document.getElementById("submitPref");
   const new_prefGen = document.getElementById("prefgender");
   const new_style = document.getElementById("prefStyle");
 
   var fbRef = firebase.database().ref().child('Users');
 
-
   btnSubmitPref.addEventListener('click', e => {
-
     var userId = firebase.auth().currentUser.uid;
-
 
     // creates the new subset of data, Preferences, for previous entry
     fbRef.child(userId).child("Preferences").set({
@@ -32,26 +26,14 @@
       Style: new_style.value
     });
     alert("preferences have been updated to \'" + new_prefGen.value + "\' and \'" + new_style.value + "\'");
-
   });
-
-
 
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
-
-
-
     } else {
       // also onclick functions for logout button in html file
       console.log('not logged in');
       window.location = "signin.html";
     }
   });
-
-  /*firebase.auth().signOut(firebaseUser =>{
-    console.log("Signed Out");
-    )
-  });*/
-
 } ());
