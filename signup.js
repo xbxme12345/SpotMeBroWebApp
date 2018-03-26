@@ -1,5 +1,4 @@
-(function() {
-
+(function () {
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
@@ -13,23 +12,24 @@
 
   // Get elements' reference. Later use .value
   // Did not work if I used .value here
-  const txtEmail = document.getElementById("txtEmail");
-  const txtPassword = document.getElementById("txtPassword");
-  const txtPassword2 = document.getElementById("txtConfirmPassword");
-  const gender = document.getElementById("gender");
-  const secQ = document.getElementById("securityQuestion");
-  const secA = document.getElementById("securityAnswer");
-  const liftStyle = document.getElementById("style");
-  const prefgen = document.getElementById("prefgender");
-  const btnSignUp = document.getElementById("btnSignUp");
+  var txtName = document.getElementById("txtName");
+  var txtEmail = document.getElementById("txtEmail");
+  var txtPassword = document.getElementById("txtPassword");
+  var txtPassword2 = document.getElementById("txtConfirmPassword");
+  var gender = document.getElementById("gender");
+  var secQ = document.getElementById("securityQuestion");
+  var secA = document.getElementById("securityAnswer");
+  var liftStyle = document.getElementById("style");
+  var prefgen = document.getElementById("prefgender");
+  //const btnSignUp = document.getElementById("btnSignUp");
 
 
   // add sign up event
-  btnSignUp.addEventListener('click', e => {
+  function signUp() {
     // get email and pass
-    const email = txtEmail.value;
-    const pass = txtPassword.value;
-    const auth = firebase.auth();
+    var email = txtEmail.value;
+    var pass = txtPassword.value;
+    var auth = firebase.auth();
     // sign in
     if( txtPassword.value == txtPassword2.value)
     {
@@ -41,7 +41,7 @@
       console.log('passwords don\'t match');
     }
 
-  });
+  }
 
 
 
@@ -59,6 +59,7 @@
       /* added Availability as an empty string because if you don't it will be
         read as null and causes problems later when the user inputs first avail time */
       fbRef.child(uidPERM).set({
+        Name: txtName.value,
         Answer: secA.value,
         Availability: "",
         Email: txtEmail.value,
@@ -79,6 +80,5 @@
       console.log('not logged in');
     }
   })
-
 
 } ());

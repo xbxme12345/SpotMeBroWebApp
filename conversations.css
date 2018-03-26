@@ -1,4 +1,4 @@
-.btn-group{
+.btn-group {
   position: fixed;
   height: 100%;
   z-index: 1;
@@ -9,7 +9,7 @@
   background-color: #3399ff;
 }
 
-nav button{
+.btn-group button{
   background-color: #3399ff;
   padding: 20px;
   color: black;
@@ -21,8 +21,7 @@ nav button{
   background-color: #D3D3D3;
 }
 
-
-#availability{
+#container {
   width: 450px;
   padding: 30px;
   margin: 40px auto;
@@ -31,7 +30,7 @@ nav button{
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
 }
 
-#availability h1 {
+#container h1 {
   background: #3399ff;
   padding: 20px 30px 15px 30px;
   margin: -30px -30px 30px -30px;
@@ -43,40 +42,11 @@ nav button{
   text-align: center;
 }
 
-#availability #selectDay, #selectHour, #selectTimeOfDay{
-  display: inline-block;
-  padding-bottom: 20px;
-  border-radius: 6px;
-  margin-bottom: 15px:
-}
-
-#availability #daysOfWeek,
-#availability #hour,
-#availability #timeOfDay {
+#container #conversationSection {
   display: inline-block;
   box-sizing: border-box;
   width: 100%;
   padding: 8px;
   border: 2px solid #fff;
   box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
-}
-
-#availability #button #btnSubmit{
-  background: #3399ff;
-  padding: 8px 20px 8px 20px;
-  border-radius: 5px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-  border: 1px solid #257C9E;
-}
-
-#availability #availP .availEntries {
-  padding: 10px;
-  background: #F8F8F8;
-  border-radius: 6px;
-  margin-bottom: 15px;
-  background-color: #3399ff;
-  list-style-type: none;
-  width: 25%;
-
 }

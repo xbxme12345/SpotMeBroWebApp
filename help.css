@@ -1,0 +1,73 @@
+.btn-group{
+  position: fixed;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  background-color: #3399ff;
+}
+
+.btn-group button{
+  background-color: #3399ff;
+  padding: 20px;
+  color: black;
+  width: 200px;
+  display: block;
+}
+
+.btn-group button:hover{
+  background-color: #D3D3D3;
+}
+
+.container {
+  width: 450px;
+  padding: 30px;
+  margin: 40px auto;
+  background: #FFF;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+}
+
+.container h1 {
+  background: #3399ff;
+  padding: 20px 30px 15px 30px;
+  margin: -30px -30px 30px -30px;
+  border-radius: 10px 10px 0 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+  font: normal 30px, serif;
+  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+  border: 1px solid #257C9E;
+  text-align: center;
+}
+
+.container #helpSection {
+  padding: 5px;
+  background: #F8F8F8;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.container .collapsible {
+  background-color: #3399ff;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #56A0EA;
+}
+
+.container #content {
+  padding; 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #F8F8F8;
+}

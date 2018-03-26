@@ -30,13 +30,11 @@ dbRefObject.once("value", function(snapshot) {
     uidArr.push(child.key);
     //console.log(child.key + " : " + child.val());
   });
-  console.log("gets uid of each User entry");
   console.log(uidArr);
 });
 
 
 dbRefObject.on("value", snap => {
-  console.log("everything for each User entry");
   console.log(snap.val());
 });
 

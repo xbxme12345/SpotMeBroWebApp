@@ -14,6 +14,7 @@
       <button onclick="location.href='preferenceEditor.html'"><strong>Go to your Preference Editor</strong></button>
       <button onclick="location.href='profilepage.html'"><strong>Go to your Profile</strong></button>
       <button onclick="location.href='availability.html'"><strong>Select your Availability</strong></button>
+			<button onclick="location.href='conversations.html'"><strong>Conversations</strong></button>
       <button onclick="location.href='contact.html'"><strong>Contact Us</strong></button>
 			<button onclick="location.href='help.html'"><strong>Help</strong></button>
 			<button id="btnSignOut" onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
@@ -21,6 +22,7 @@
 		<div id="profileContainer">
 			<h1>Profile</h1>
 			<div id="profileInfo">
+				<p id="Name">Name: </p>
 				<p id="Email">Email: </p>
 				<p id="Gender">Gender: </p>
 				<p id="Security_Question"> Security Question: </p>
@@ -42,9 +44,11 @@
 
 				var userId = firebase.auth().currentUser.uid;
 				return firebase.database().ref('/Users/' + userId).once('value').then(function(snapshot) {
-					  var qq = snapshot.val().Security;
+						var nn = snapshot.val().Name;
+						var qq = snapshot.val().Security;
 						var aa = snapshot.val().Answer;
 						var gg = snapshot.val().Gender;
+						document.getElementById("Name").innerHTML += nn;
 						document.getElementById("Security_Question").innerHTML += qq;
 						document.getElementById("Security_Answer").innerHTML += aa;
 						document.getElementById("Gender").innerHTML += gg;

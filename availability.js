@@ -155,7 +155,7 @@ function submitTime(){
     var userEmail = user.email;
     var userId = user.uid;
 
-    availString += day.value + " " + hourMT + ",";
+    availString += day.value + " " + hourMT + ", ";
 
 
 

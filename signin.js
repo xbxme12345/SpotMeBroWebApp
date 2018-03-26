@@ -32,26 +32,6 @@
     promise.catch(e => console.log(e.message));
   });
 
-
-  /* Don't need this for the sign-in page
-  // add sign up event
-  btnSignUp.addEventListener('click', e => {
-    // get email and pass
-    const email = txtEmail.value;
-    const pass = txtPassword.value;
-    const auth = firebase.auth();
-    // sign in
-    const promise = auth.createUserWithEmailAndPassword(email, pass);
-    promise.catch(e => console.log(e.message));
-  }); */
-
-
-  /* do not need logout for sign-in page
-  btnLogout.addEventListener('click', e => {
-    firebase.auth().signOut();
-  }); */
-
-
   // add a real time listener
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
@@ -65,5 +45,11 @@
     }
   })
 
+  document.getElementById("txtPassword").addEventListener("keyup", function(event){
+    event.preventDefault();
+    if(event.keyCode === 13) {
+      document.getElementById("btnLogin").click();
+    }
+  });
 
 } ());
