@@ -31,13 +31,13 @@
       var availString = "";
 
       //function to get name, however its done
-      var name;
+      var name = "Jon Tonthat";
 
 
       fbRef.child("Messages").once('value',function(snap) {
           snap.forEach(function(item)
           {
-              var itemName = item.name();
+              var itemName = item.val().key; // <-- check this out 
               if (itemName.includes(name))
               {
                 var Names = itemName.split("-");
@@ -47,15 +47,15 @@
                 }
                 else
                 {
-                  document.getElementById("pid").innerHTML += <b><a> Names[1]</a></b></br>;
+                  document.getElementById("pid").innerHTML += "</br><a>" + Names[1] + "</a></br></br>";
                 }
-                f (Names[1] == name)
+                if (Names[1] == name)
                 {
 
                 }
                 else
                 {
-                  document.getElementById("pid").innerHTML += <b><a> Names[0]</a></b></br>;
+                  document.getElementById("pid").innerHTML += "</br><a>" + Names[0] + "</a></br></br>";
                 }
 
               }
