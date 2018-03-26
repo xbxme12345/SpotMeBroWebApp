@@ -4,7 +4,7 @@
   <title>Matches' Profile</title>
   <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-  <link rel="stylesheet" type="text/css" href="matchespage.css">
+  <link rel="stylesheet" type="text/css" href="matchesprofile.css">
   <script>
     // Initialize Firebase
     var config = {
@@ -55,64 +55,53 @@
       <p id="Email"></p>
       <p id="Gender"></p>
     </div>
+    <button onclick="createConversation()">Create Conversation</button>
   </div>
 
   <script src="matchespage.js"></script>
   <script>
     const dbRef = firebase.database().ref('Users');
     var clickedMatchesEmail = window.location.href;
+    var nameVal, emailVal, genderVal;
 
-    function getMatches(userid, availS){
-      availS = availS.split(",");
-      availS.pop();
-
-      clickedMatchesEmail = clickedMatchesEmail.split("?");
-      clickedMatchesEmail = clickedMatchesEmail[1].split("=");
-
-      var arr = [];
-
-      dbRef.child("Users").child(clickedMatchesEmail[0]).child(clickedMatchesEmail[1]).once("value", function(snapshot) {
-        snapshot.forEach(function(child) {
-          if(child.key == userid){
-          } else {
-            arr.push(child.val().Name);
-            arr.push(child.val().Email);
-            arr.push(child.val().Gender);
-          }
-        });
-        for(var k = 0; k < arr.length; k++){
-          if(k == 0){
-            document.getElementById("Name").innerHTML += "Name: " + arr[k];
-          } else if(k == 1) {
-            document.getElementById("Email").innerHTML += "Email: " + arr[k];
-          } else if(k ==2) {
-            document.getElementById("Gender").innerHTML += "Gender: " + arr[k];
-          } else {
-            console.log("Error");
-          }
-        }
-      });
-
-      dbRef.on('value', profileData, errData)
+    window.onload = function profileInfo(){
+      var ref = firebase.database().ref("Users");
+      ref.on("value", profileData, errData);
     }
 
-    /*function getProfile(){
-      var clickedMatchesEmail = window.location.href;
+    function profileData(data) {
       clickedMatchesEmail = clickedMatchesEmail.split("?");
       clickedMatchesEmail = clickedMatchesEmail[1].split("=");
 
-      dbRef.child(clickedMatchesEmail[0]).once("value", function(snapshot) {
-        snapshot.forEach(function(child) {
-          matchName = child.val().Name;
-          matchEmail = child.val().Email;
-          matchGender = child.val().Gender;
-        });
-        document.getElementById("Name").innerHTML += "Name: " + matchName;
-        document.getElementById("Email").innerHTML += "Email: " + matchEmail;
-        document.getElementById("Gender").innerHTML += "Gender: " + matchGender;
-      });
-    }*/
+      var allData = data.val();
+      var keys = Object.keys(allData);
 
+      for(var i = 0; i < keys.length; i++){
+        var k = keys[i];
+        var emailFbVal = allData[k].Email
+        if(clickedMatchesEmail[1].toLowerCase() == emailFbVal.toLowerCase()){
+          nameVal = allData[k].Name;
+          emailVal = allData[k].Email;
+          genderVal = allData[k].Gender;
+
+          document.getElementById("Name").innerHTML += "Name: " + nameVal;
+          document.getElementById("Email").innerHTML += "Email: " + emailVal;
+          document.getElementById("Gender").innerHTML += "Gender: " + genderVal;
+        } else {
+
+        }
+      }
+    }
+
+    function errData(error){
+      console.log("Error: " + error);
+    }
+
+    function createConversation() {
+      console.log(nameVal);
+      console.log(emailVal);
+      console.log(genderVal);
+    }
   </script>
 </body>
 </html>
