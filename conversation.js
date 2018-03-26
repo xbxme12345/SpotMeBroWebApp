@@ -51,12 +51,12 @@
         var Names = itemName.split("-");
         if (Names[0] == name) {
         } else {
-          document.getElementById("pid").innerHTML += "</br><a>" + Names[0] + "</a></br></br>";
+          document.getElementById("conversationSection").innerHTML += "</br><a>" + Names[0] + "</a></br></br>";
         }
 
         if (Names[1] == name) {
         } else {
-          document.getElementById("pid").innerHTML += "</br><a>" + Names[1] + "</a></br></br>";
+          document.getElementById("conversationSection").innerHTML += "</br><a>" + Names[1] + "</a></br></br>";
         }
       }
     }
