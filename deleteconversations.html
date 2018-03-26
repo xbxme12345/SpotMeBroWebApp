@@ -24,8 +24,65 @@
     <h1>Delete Conversation</h1>
     <div id="deleteConversation">
       <!--Insert Conversations Here-->
+      <p id="pid"></p>
     </div>
     <button onclick="location.href='conversations.html'">Done Editing</button>
   </div>
+
+  <script>
+  function deleteEntry(k)
+  {
+    var allCurrentTimesArr = document.getElementsByClassName("pid");
+		var updatedEntryString = ""; // reads as undefined if I don't specify it's a string
+		var entryToBeDeleted = "";
+
+		for (var i = 0; i < allCurrentTimesArr.length; i++) {
+			if (i == k) {
+				entryToBeDeleted = allCurrentTimesArr[i].innerText;
+			} else {
+				// add entry to string that will be used for updating availability section under user
+				updatedEntryString += allCurrentTimesArr[i].innerText + ",";
+			}
+		}
+
+		entryToBeDeleted = entryToBeDeleted.split(" ");
+
+		//console.log("new list is   " + updatedEntryString);
+
+		/* I have my new string that will be used to update firebase without the clicked entry
+		 	need to call firebase now to update Availability field */
+
+		var fbRef = firebase.database().ref();
+		var fbRefUsers = firebase.database().ref().child('Messages');
+
+
+		// delete time entry under day
+    try {
+      fbRef.child(" "+entryToBeDeleted + "-" + name).remove();
+    } catch (e) {
+
+    } finally {
+
+    }
+    try {
+      fbRef.child(" "+name + "-" + entryToBeDeleted).remove();
+    } catch (e) {
+
+    } finally {
+      
+    }
+
+
+		/* Reloads page to avoid the printing of a second list on page with deleted entry,
+		 	by reloading it quickly fixes this problem. Look for another possible solution. */
+		location.reload();
+		/* need to "reset the view of availability times" */
+
+
+  }
+
+
+
+  </script>
 </body>
 </html>
