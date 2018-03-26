@@ -1,5 +1,4 @@
 (function() {
-
   function snapshotToArray(snapshot) {
       var returnArr = [];
 
@@ -24,22 +23,10 @@
   };
   firebase.initializeApp(config);
 
-
   var fbRef = firebase.database().ref();
-
-
-  /*
-  times = availabilities.split(",");
-  for (var k = 0; k < times.length; k++)
-  {
-    document.write('<li' + 'value="' + times[k] +'"onclick= "goto(this)">' + 		  times[k] + '</li>');
-  } */
-
-
 
   firebase.auth().onAuthStateChanged(user => {
     if(user){
-
       var uid = user.uid;
       var availString = "";
       var name;
@@ -47,85 +34,33 @@
       var userId = firebase.auth().currentUser.uid;
       firebase.database().ref('/Users/' + userId).once('value').then(function(snapshot) {
           name = snapshot.val().Name;
-
-/*
-      fbRef.child("Messages").once('value',function(snap) {
-          snap.forEach(function(item)
-          {
-              document.getElementById("pid").innerHTML += "</br><a>" + "x" + "</a></br></br>";
-              var itemName = item.val().key; // <-- check this out
-              if (itemName.includes(name))
-              {
-                var Names = itemName.split("-");
-                if (Names[0] == name)
-                {
-
-                }
-                else
-                {
-                  document.getElementById("pid").innerHTML += "</br><a>" + Names[1] + "</a></br></br>";
-                }
-                if (Names[1] == name)
-                {
-
-                }
-                else
-                {
-                  document.getElementById("pid").innerHTML += "</br><a>" + Names[0] + "</a></br></br>";
-                }
-
-              }
+  });
 
 
-          });
-          */
-
-
-fbRef.child("Messages").once('value',function(snap)
-{
-  var retarr = snapshotToArray(snap)
-  var index;
-  for (index = 0; index <= retarr.length; ++index)
+  fbRef.child("Messages").once('value',function(snap)
   {
+    var retarr = snapshotToArray(snap)
+    var index;
+    for (index = 0; index <= retarr.length; index++)
+    {
       console.log(retarr[index].key);
       //document.getElementById("pid").innerHTML += "</br><a>" + "x" + "</a></br></br>";
       var itemName = retarr[index].key; // <-- check this out
       if (itemName.includes(name))
       {
         var Names = itemName.split("-");
-        if (Names[0] == name)
-        {
-
-        }
-        else
-        {
-          document.getElementById("pid").innerHTML += "</br><a onclick=deleteEntry2>" + Names[0] + "</a></br></br>";
+        if (Names[0] == name) {
+        } else {
+          document.getElementById("deleteConversation").innerHTML += "</br><a onclick='deleteEntry()'>" + Names[0] + "</a></br></br>";
         }
 
-        if (Names[1] == name)
-        {
-
+        if (Names[1] == name) {
+        } else {
+          document.getElementById("deleteConversation").innerHTML += "</br><a onclick='deleteEntry()'>" + Names[1] + "</a></br></br>";
         }
-        else
-        {
-          document.getElementById("pid").innerHTML += "</br><a onclick=deleteEntry2>" + Names[1] + "</a></br></br>";
-        }
-
       }
-  }
-
-
-
-
-//});
-});
-
-
-
-
-
     }
-  })
-
-
+  });
+  }
+})
 } ());

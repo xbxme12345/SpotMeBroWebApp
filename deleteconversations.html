@@ -29,10 +29,10 @@
     <button onclick="location.href='conversations.html'">Done Editing</button>
   </div>
 
+  <script src="deleteconversations.js"></script>
   <script>
-  function deleteEntry(k)
-  {
-    var allCurrentTimesArr = document.getElementsByClassName("pid");
+  function deleteEntry(k) {
+    var allCurrentTimesArr = document.getElementsByTagName("a");
 		var updatedEntryString = ""; // reads as undefined if I don't specify it's a string
 		var entryToBeDeleted = "";
 
@@ -55,7 +55,6 @@
 		var fbRef = firebase.database().ref();
 		var fbRefUsers = firebase.database().ref().child('Messages');
 
-
 		// delete time entry under day
     try {
       fbRef.child(" "+entryToBeDeleted + "-" + name).remove();
@@ -69,19 +68,13 @@
     } catch (e) {
 
     } finally {
-      
+
     }
-
-
 		/* Reloads page to avoid the printing of a second list on page with deleted entry,
 		 	by reloading it quickly fixes this problem. Look for another possible solution. */
 		location.reload();
 		/* need to "reset the view of availability times" */
-
-
   }
-
-
 
   </script>
 </body>
