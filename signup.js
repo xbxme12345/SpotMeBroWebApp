@@ -61,7 +61,7 @@
 
   // reference to save data must be set globally
   var fbRef = firebase.database().ref().child('Users');
-var fbRef2 = firebase.database().ref();
+  var fbRef2 = firebase.database().ref();
 
   fbRef2.child("Messages").once('value',function(snap)
   {
@@ -73,10 +73,6 @@ var fbRef2 = firebase.database().ref();
       {
         return
       }
-
-
-
-
     }
 
 
@@ -112,6 +108,6 @@ var fbRef2 = firebase.database().ref();
     }
   })
 
-}
+});
 
 } ());
