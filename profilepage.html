@@ -25,8 +25,6 @@
 				<p id="Name">Name: </p>
 				<p id="Email">Email: </p>
 				<p id="Gender">Gender: </p>
-				<p id="Security_Question"> Security Question: </p>
-				<p id="Security_Answer">Security Answer: </p>
 			</div>
 		</div>
 	</div>
@@ -45,12 +43,8 @@
 				var userId = firebase.auth().currentUser.uid;
 				return firebase.database().ref('/Users/' + userId).once('value').then(function(snapshot) {
 						var nn = snapshot.val().Name;
-						var qq = snapshot.val().Security;
-						var aa = snapshot.val().Answer;
 						var gg = snapshot.val().Gender;
 						document.getElementById("Name").innerHTML += nn;
-						document.getElementById("Security_Question").innerHTML += qq;
-						document.getElementById("Security_Answer").innerHTML += aa;
 						document.getElementById("Gender").innerHTML += gg;
 				});
 
