@@ -1,4 +1,17 @@
 (function () {
+
+  function snapshotToArray(snapshot) {
+      var returnArr = [];
+
+      snapshot.forEach(function(childSnapshot) {
+          var item = childSnapshot.val();
+          item.key = childSnapshot.key;
+
+          returnArr.push(item);
+      });
+
+      return returnArr;
+  };
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
@@ -48,6 +61,19 @@
 
   // reference to save data must be set globally
   var fbRef = firebase.database().ref().child('Users');
+  var fbRef2 = firebase.database().ref();
+
+  fbRef2.child("Messages").once('value',function(snap)
+  {
+    var retarr = snapshotToArray(snap)
+    var index;
+    for (index = 0; index <= retarr.length; ++index)
+    {
+      if (retarr[index] == txtName)
+      {
+        return
+      }
+    }
 
 
   // add a real time listener
@@ -81,5 +107,7 @@
       console.log('not logged in');
     }
   })
+
+});
 
 } ());
