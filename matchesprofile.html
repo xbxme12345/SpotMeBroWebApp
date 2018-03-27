@@ -113,9 +113,27 @@
         var month = months[d.getMonth()];
         var day = d.getDate();
 
+
+
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        var md = "";
+
+        if (h > 11) {
+          md = "PM";
+        } else {
+          md = "AM";
+        }
+
+
+
+
+
         firebase.database().ref().child("Messages").child(" " + myname + "-" + nameVal).child("MessageList").push().set(
            // make like mobile
-           "Started a conversation-" + myname + "-" + month + " " + day + ", " + d.getFullYear() // add time h:mm:ss AM/PM
+           "Started a conversation-" + myname + "-" + month + " " + day + ", " + d.getFullYear() + " " +  h + ":" + m + ":" + s + " " + md
         );
 
       });
