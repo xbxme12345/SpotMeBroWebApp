@@ -41,7 +41,7 @@
   {
     var retarr = snapshotToArray(snap)
     var index;
-    for (index = 0; index <= retarr.length; index++)
+    for (index = 0; index < retarr.length; index++)
     {
       console.log(retarr[index].key);
       //document.getElementById("pid").innerHTML += "</br><a>" + "x" + "</a></br></br>";

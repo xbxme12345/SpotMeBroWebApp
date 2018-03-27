@@ -47,7 +47,7 @@
     if( txtPassword.value == txtPassword2.value)
     {
       const promise = auth.createUserWithEmailAndPassword(email, pass);
-      promise.catch(e => console.log(e.message));
+      promise.catch(e => alert(e.message));
     }
     else
     {
