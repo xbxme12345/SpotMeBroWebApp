@@ -29,7 +29,7 @@
     // Sign in
     const promise = auth.signInWithEmailAndPassword(email, password);
     // error messages include email already in use and improper email entered
-    promise.catch(e => console.log(e.message));
+    promise.catch(e => alert(e.message));
   });
 
   // add a real time listener
