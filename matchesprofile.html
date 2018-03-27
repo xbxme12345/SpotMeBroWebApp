@@ -108,10 +108,15 @@
       return firebase.database().ref('/Users/' + userId).once('value').then(function(snapshot) {
 
         var myname = snapshot.val().Name;
+        var d = new Date();
+        var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+        var month = months[d.getMonth()];
+        var day = d.getDate();
 
-        firebase.database().ref().child("Messages").child(" " + myname + "-" + nameVal).child("MessageList").set({
+        firebase.database().ref().child("Messages").child(" " + myname + "-" + nameVal).child("MessageList").push().set(
            // make like mobile
-        });
+           "Started a conversation-" + myname + "-" + month + " " + day + ", " + d.getFullYear() // add time h:mm:ss AM/PM
+        );
 
       });
 
