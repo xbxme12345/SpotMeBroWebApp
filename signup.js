@@ -67,17 +67,17 @@ var fbRef2 = firebase.database().ref();
   {
     var retarr = snapshotToArray(snap)
     var index;
+    var tempname = "no name found"
     for (index = 0; index <= retarr.length; ++index)
     {
       if (retarr[index] == txtName)
       {
-        return
+        tempname= retarr[index]
       }
-
-
-
-
     }
+
+    if(tempname = "no name found")
+    {
 
 
   // add a real time listener
@@ -111,6 +111,10 @@ var fbRef2 = firebase.database().ref();
       console.log('not logged in');
     }
   })
+}
+else {
+  console.log('Name already used!!!!!!!');
+}
 
 }
 
