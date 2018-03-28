@@ -121,8 +121,21 @@
         var s = today.getSeconds();
         var md = "";
 
-        if (h > 11) {
+
+        if (m < 10) {
+          m = "0" + m;
+        }
+
+        if (s < 10) {
+          s = "0" + s;
+        }
+
+
+        if (h >= 12) {
           md = "PM";
+          if (h >= 13){
+            h = h - 12;
+          }
         } else {
           md = "AM";
         }
