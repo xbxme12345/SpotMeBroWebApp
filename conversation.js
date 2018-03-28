@@ -48,7 +48,10 @@
       var itemName = retarr[index].key; // <-- check this out
       if (itemName.includes(name))
       {
+
         var Names = itemName.split("-");
+
+        /*
         if (Names[0] == name) {
         } else {
           document.getElementById("conversationSection").innerHTML += "</br><a>" + Names[0] + "</a></br></br>";
@@ -57,7 +60,20 @@
         if (Names[1] == name) {
         } else {
           document.getElementById("conversationSection").innerHTML += "</br><a>" + Names[1] + "</a></br></br>";
+        } */
+
+
+        // works but not sure why because indices should be swapped
+        if (Names[0] == name) {
+          document.getElementById("conversationSection").innerHTML += "</br><a>" + Names[0] + "</a></br></br>";
+        } else {
+          document.getElementById("conversationSection").innerHTML += "</br><a>" + Names[1] + "</a></br></br>";
         }
+
+
+
+
+
       }
     }
   });
