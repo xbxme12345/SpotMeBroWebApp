@@ -59,7 +59,7 @@
         }
       }
 
-      if(tempname = "no name found")
+      if(tempname == "no name found")
       {
     // sign in
     if( txtPassword.value == txtPassword2.value)
@@ -79,9 +79,6 @@
 
   // reference to save data must be set globally
   var fbRef = firebase.database().ref().child('Users');
-
-
-
   // add a real time listener
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
