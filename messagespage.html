@@ -16,10 +16,22 @@
 		};
 		firebase.initializeApp(config);
 	</script>
+  <style>
+  div.messagewindow {
+    background-color: lightblue;
+    width: 75%;
+    height: 70%;
+    overflow: auto;
+}
+textarea{
+  resize: none;
+}
+  </style>
 </head>
   <h1>Messages Page</h1>
 
-  <p id="pid"></p>
+  <p id="pid0"></p>
+  <div id="pid" class="messagewindow"></div>
 
   <script>
   function snapshotToArray(snapshot) {
@@ -53,18 +65,20 @@
 
   while (convo.includes("%20")) {
     convo = convo.replace("%20", " ");
-    console.log(convo);
+    //console.log(convo);
   }
 
   while (myname.includes("%20")) {
     myname = myname.replace("%20", " ");
-    console.log(myname);
+    //console.log(myname);
   }
 
 
   var fbRef = firebase.database().ref();
 
-  fbRef.child("Messages").child(convo).child("MessageList").once('value',function(snap) {
+  fbRef.child("Messages").child(convo).child("MessageList").on('value',function(snap) { //.once
+
+    document.getElementById("pid").innerHTML = "";
 
     var retarr = snapshotToArray(snap)
 
@@ -74,10 +88,24 @@
       //console.log(retarr[index]);
 
       var itemName = retarr[index]; // <-- check this out
+      var a = itemName.split("-");
+      var sender = a.length - 2;
+      //console.log("sender is " + a[sender]);
 
-      //var Names = itemName.split("-");
+      var person = convo.split("-");
+      //console.log("person0 is " + person[0]);
+      //console.log("person1 is " + person[1]);
+
 
       document.getElementById("pid").innerHTML += itemName + "</br>";
+
+      // trying to change font color depending on who sends message
+      /*
+      if (sender == person[0]) {
+        document.getElementById("pid").innerHTML += "<font color=\"red\">" + itemName + "</font></br>";
+      } else if (sender == person[1]) {
+        document.getElementById("pid").innerHTML += "<font color=\"blue\">" + itemName + "</br>";
+      } */
 
     }
   });
