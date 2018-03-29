@@ -43,6 +43,24 @@
     var email = txtEmail.value;
     var pass = txtPassword.value;
     var auth = firebase.auth();
+
+    var fbRef2 = firebase.database().ref();
+
+    fbRef2.child("Messages").once('value',function(snap)
+    {
+      var retarr = snapshotToArray(snap)
+      var index;
+      var tempname = "no name found"
+      for (index = 0; index <= retarr.length; ++index)
+      {
+        if (retarr[index] == txtName)
+        {
+          tempname= retarr[index]
+        }
+      }
+
+      if(tempname = "no name found")
+      {
     // sign in
     if( txtPassword.value == txtPassword2.value)
     {
@@ -61,23 +79,7 @@
 
   // reference to save data must be set globally
   var fbRef = firebase.database().ref().child('Users');
-  var fbRef2 = firebase.database().ref();
 
-  fbRef2.child("Messages").once('value',function(snap)
-  {
-    var retarr = snapshotToArray(snap)
-    var index;
-    var tempname = "no name found"
-    for (index = 0; index <= retarr.length; ++index)
-    {
-      if (retarr[index] == txtName)
-      {
-        tempname= retarr[index]
-      }
-    }
-
-    if(tempname = "no name found")
-    {
 
 
   // add a real time listener
@@ -114,6 +116,7 @@
 }
 else {
   console.log('Name already used!!!!!!!');
+  alert("Passwords do not match");
 }
 
 });
