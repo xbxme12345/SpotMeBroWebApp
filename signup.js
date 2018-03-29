@@ -55,7 +55,7 @@
       {
         if (retarr[index] == txtName)
         {
-          tempname= retarr[index]
+          tempname = retarr[index]
         }
       }
 
@@ -72,9 +72,13 @@
       console.log('passwords don\'t match');
       alert("Passwords do not match");
     }
+}
 
-
-
+    else {
+      console.log('Name already used!!!!!!!');
+      alert("Passwords do not match");
+    }
+      });
 
 
   // reference to save data must be set globally
@@ -110,12 +114,8 @@
       console.log('not logged in');
     }
   })
-}
-else {
-  console.log('Name already used!!!!!!!');
-  alert("Passwords do not match");
-}
-  });
+
+
 
 });
 
