@@ -50,8 +50,8 @@ submitBtn.addEventListener("click", e => {
     msg + "-" + myname + "-" + month + " " + day + ", " + d.getFullYear() + " " +  h + ":" + m + ":" + s + " " + md
   );
 
-  window.location.reload();
-  //document.getElementById("messagearea").value = "";
+  //window.location.reload();
+  document.getElementById("messagearea").value = "";
 
 
 });
