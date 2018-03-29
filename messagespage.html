@@ -16,10 +16,22 @@
 		};
 		firebase.initializeApp(config);
 	</script>
+  <style>
+  div.messagewindow {
+    background-color: lightblue;
+    width: 75%;
+    height: 70%;
+    overflow: auto;
+}
+textarea{
+  resize: none;
+}
+  </style>
 </head>
   <h1>Messages Page</h1>
 
-  <p id="pid"></p>
+  <p id="pid0"></p>
+  <div id="pid" class="messagewindow"></div>
 
   <script>
   function snapshotToArray(snapshot) {
