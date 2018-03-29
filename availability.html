@@ -114,7 +114,7 @@
 
 		/* Reloads page to avoid the printing of a second list on page with deleted entry,
 		 	by reloading it quickly fixes this problem. Look for another possible solution. */
-		location.reload();
+		//location.reload();
 		/* need to "reset the view of availability times" */
   }
 
@@ -143,6 +143,9 @@
 
 			// still can't get access to outside of block
 			fbRef.child(user.uid).child("Availability").on("value", function(snapshot) {
+
+				document.getElementById("availP").innerHTML = "";
+
 				availString = snapshot.val();
 
 				//console.log(availString);
