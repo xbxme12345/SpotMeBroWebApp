@@ -1,0 +1,102 @@
+<html>
+<body>
+<head>
+  <title>Conversation</title>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+  <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script type="text/javascript">
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
+			authDomain: "spotmebro-82458.firebaseapp.com",
+			databaseURL: "https://spotmebro-82458.firebaseio.com",
+			projectId: "spotmebro-82458",
+			storageBucket: "spotmebro-82458.appspot.com",
+			messagingSenderId: "737240148087"
+		};
+		firebase.initializeApp(config);
+	</script>
+</head>
+  <h1>Messages Page</h1>
+
+  <p id="pid"></p>
+
+  <script>
+  function snapshotToArray(snapshot) {
+      var returnArr = [];
+
+      snapshot.forEach(function(childSnapshot) {
+          var item = childSnapshot.val();
+          item.key = childSnapshot.key;
+
+          returnArr.push(item);
+      });
+
+      return returnArr;
+  };
+
+
+  var peeps = window.location.href.split("?");
+  peeps = peeps[1].split("&");
+  var myname = peeps[1];
+  peeps = peeps[0];
+
+  myname = myname.split("=");
+  myname = myname[1];
+
+  peeps = peeps.split("=");
+  peeps = peeps[1];
+
+  var convo = peeps;
+
+  console.log("peeps[0] is " + peeps[0]);
+
+  while (convo.includes("%20")) {
+    convo = convo.replace("%20", " ");
+    console.log(convo);
+  }
+
+  while (myname.includes("%20")) {
+    myname = myname.replace("%20", " ");
+    console.log(myname);
+  }
+
+
+  var fbRef = firebase.database().ref();
+
+  fbRef.child("Messages").child(convo).child("MessageList").once('value',function(snap) {
+
+    var retarr = snapshotToArray(snap)
+
+    console.log(retarr);
+
+    for (var index = 0; index < retarr.length; index++) {
+      //console.log(retarr[index]);
+
+      var itemName = retarr[index]; // <-- check this out
+
+      //var Names = itemName.split("-");
+
+      document.getElementById("pid").innerHTML += itemName + "</br>";
+
+    }
+  });
+
+
+
+  </script>
+
+  <textarea id="messagearea" rows="4" cols="65"></textarea>
+  <button id="submitBtn">Submit</button>
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="messagespage.js"></script>
+
+</body>
+</html>
