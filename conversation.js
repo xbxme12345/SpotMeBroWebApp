@@ -40,6 +40,7 @@
   fbRef.child("Messages").once('value',function(snap)
   {
     var retarr = snapshotToArray(snap)
+    //console.log(retarr);
     var index;
     for (index = 0; index < retarr.length; index++)
     {
@@ -63,11 +64,11 @@
         } */
 
 
-        // works but not sure why because indices should be swapped
+
         if (Names[0] == name) {
-          document.getElementById("conversationSection").innerHTML += "</br><a>" + Names[0] + "</a></br></br>";
-        } else {
-          document.getElementById("conversationSection").innerHTML += "</br><a>" + Names[1] + "</a></br></br>";
+          document.getElementById("conversationSection").innerHTML += "</br><a href=\"messagespage.html?peeps="+itemName+"&myname=" + name + "\">" + Names[1] + "</a></br></br>";
+        } else if (Names[1] == name) {
+          document.getElementById("conversationSection").innerHTML += "</br><a href=\"messagespage.html?peeps="+itemName+"&myname=" + name + "\">" + Names[0] + "</a></br></br>";
         }
 
 
