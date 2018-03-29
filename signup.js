@@ -73,7 +73,7 @@
       alert("Passwords do not match");
     }
 
-  });
+
 
 
 
@@ -115,6 +115,7 @@ else {
   console.log('Name already used!!!!!!!');
   alert("Passwords do not match");
 }
+  });
 
 });
 
