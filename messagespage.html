@@ -16,22 +16,34 @@
 		};
 		firebase.initializeApp(config);
 	</script>
-  <style>
-  div.messagewindow {
-    background-color: lightblue;
-    width: 75%;
-    height: 70%;
-    overflow: auto;
-}
-textarea{
-  resize: none;
-}
-  </style>
+  <link rel="stylesheet" type="text/css" href="messagespage.css">
 </head>
-  <h1>Messages Page</h1>
+  <div class="btn-group">
+    <button onclick="location.href='mainpage.html'"><strong>Home Page</strong></a></button>
+    <button onclick="location.href='about.html'"><strong>About SpotMeBro</strong></button>
+    <button onclick="location.href='matchespage.html'"><strong>Go to your Matches</strong></button>
+    <button onclick="location.href='preferenceEditor.html'"><strong>Go to your Preference Editor</strong></button>
+    <button onclick="location.href='profilepage.html'"><strong>Go to your Profile</strong></button>
+    <button onclick="location.href='availability.html'"><strong>Select your Availability</strong></button>
+    <button onclick="location.href='conversations.html'"><strong>Conversations</strong></button>
+    <button onclick="location.href='contact.html'"><strong>Contact SpotMeBro</strong></button>
+    <button onclick="location.href='help.html'"><strong>Help</strong></button>
+    <button id="btnSignOut" onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
+  </div>
 
-  <p id="pid0"></p>
-  <div id="pid" class="messagewindow"></div>
+  <div id="container">
+    <h1>Messages</h1>
+    <div id="messagesSection">
+      <!--Insert Conversations Here-->
+      <p id="pid0"></p>
+      <div id="pid" class="messagewindow"></div>
+      <br/>
+      <textarea id="messagearea" rows="4" cols="65"></textarea>
+      <br/><br/>
+    </div>
+    <button id="backBtn" onclick="location.href='conversations.html'">Back</button>
+    <button id="submitBtn">Submit</button>
+  </div>
 
   <script>
   function snapshotToArray(snapshot) {
@@ -113,17 +125,6 @@ textarea{
 
 
   </script>
-
-  <textarea id="messagearea" rows="4" cols="65"></textarea>
-  <button id="submitBtn">Submit</button>
-
-
-
-
-
-
-
-
   <script type="text/javascript" src="messagespage.js"></script>
 
 </body>
