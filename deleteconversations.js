@@ -25,8 +25,6 @@
 
   firebase.initializeApp(config);
 
-  var aaa = [7,8,1];
-
   var fbRef = firebase.database().ref();
 
   firebase.auth().onAuthStateChanged(user => {
