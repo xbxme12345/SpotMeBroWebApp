@@ -29,32 +29,43 @@
     <button onclick="location.href='conversations.html'">Done Editing</button>
   </div>
 
-  <script src="deleteconversations.js"></script>
   <script>
-  function deleteEntry(k)
-  {
-    var convo1 = k+"-"+name
-    var convo2 = name+"-"+k
-    try
-    {
-      var fbRefUsers = firebase.database().ref().child('Messages').child(convo1);
-      fbRefUsers.remove;
-    }
-    catch(err)
-    {
-      document.getElementById("demo").innerHTML = err.message;
-    }
-    try
-    {
-      var fbRefUsers = firebase.database().ref().child('Messages').child(convo2);
-      fbRefUsers.remove;
-    }
-    catch(err)
-    {
-    document.getElementById("demo").innerHTML = err.message;
+
+    function deleteEntry(k, name) {
+
+      /* this hard-coded example works but when I try to do it
+      normally I receive an error for missing ) after arguement list */
+      //k = "Kyle Kable";
+      //name = "test123";
+
+      var convo1 = k + "-" + name;
+      var convo2 = name + "-" + k;
+
+      console.log("name is " + name);
+      console.log("convo1 is " + convo1);
+      console.log("convo2 is " + convo2);
+
+      try {
+        var fbRefUsers = firebase.database().ref().child('Messages').child(convo1);
+        fbRefUsers.remove();
+      } catch(err) {
+        //document.getElementById("demo").innerHTML = err.message;
+        alert(err.message);
+      }
+
+      try {
+        var fbRefUsers = firebase.database().ref().child('Messages').child(convo2);
+        fbRefUsers.remove();
+      } catch(err) {
+        //document.getElementById("demo").innerHTML = err.message;
+        alert(err.message);
+      }
+
     }
 
-  }
   </script>
+
+  <script src="deleteconversations.js"></script>
+
 </body>
 </html>
