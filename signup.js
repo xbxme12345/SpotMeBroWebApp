@@ -78,7 +78,7 @@
         alert("Name already used");
       }
     });
-
+});
 
 
           // reference to save data must be set globally
@@ -117,6 +117,6 @@
             }
           });
 
-});
+
 
 } ());
