@@ -45,16 +45,16 @@
     var auth = firebase.auth();
 
     var fbRef2 = firebase.database().ref();
-var tempname = "no name found"
+    var tempname = "no name found"
     var query = firebase.database().ref("Users");
     query.once("value")
       .then(function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
 
           var childData = childSnapshot.child("Name").val();
-          if (childData == txtName)
+          if (childData == txtName.value)
           {
-            tempname = retarr[index]
+            tempname = childSnapshot.child("Name").val();
           }
       });
       if(tempname == "no name found")
@@ -64,6 +64,22 @@ var tempname = "no name found"
         {
           const promise = auth.createUserWithEmailAndPassword(email, pass);
           promise.catch(e => alert(e.message));
+
+        }
+        else
+        {
+          console.log('passwords don\'t match');
+          alert("Passwords do not match");
+        }
+      }
+      else
+      {
+        console.log('Name already used!!!!!!!');
+        alert("Passwords do not match");
+      }
+    });
+
+
 
           // reference to save data must be set globally
           var fbRef = firebase.database().ref().child('Users');
@@ -99,22 +115,12 @@ var tempname = "no name found"
               {
                 console.log('not logged in');
               }
-            })
+            });
 
 
-        }
-        else
-        {
-          console.log('passwords don\'t match');
-          alert("Passwords do not match");
-        }
-      }
-      else
-      {
-        console.log('Name already used!!!!!!!');
-        alert("Passwords do not match");
-      }
-    });
+        //});
+
+
 
 
 
