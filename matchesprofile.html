@@ -144,7 +144,7 @@
 
 
 
-        firebase.database().ref().child("Messages").child(myname + "-" + nameVal).child("MessageList").push().set(
+        firebase.database().ref().child("Messages").child(nameVal + "-" + myname).child("MessageList").push().set(
            // make like mobile
            "Started a conversation-" + myname + "-" + month + " " + day + ", " + d.getFullYear() + " " +  h + ":" + m + ":" + s + " " + md
         );
