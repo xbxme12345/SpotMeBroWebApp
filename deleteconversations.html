@@ -33,17 +33,36 @@
 
     function deleteEntry(k, name) {
 
-      /* this hard-coded example works but when I try to do it
-      normally I receive an error for missing ) after arguement list */
-      //k = "Kyle Kable";
-      //name = "test123";
+      var allCurrentConvosArr = document.getElementsByClassName("allConvosClass");
+      var updatedConvoString = ""; // reads as undefined if I don't specify it's a string
+  		var convoToBeDeleted = "";
 
-      var convo1 = k + "-" + name;
-      var convo2 = name + "-" + k;
 
-      console.log("name is " + name);
-      console.log("convo1 is " + convo1);
-      console.log("convo2 is " + convo2);
+      for (var j = 0; j < allCurrentConvosArr.length; j++) {
+  			if (j == k) {
+  				convoToBeDeleted = allCurrentConvosArr[j].innerText;
+          console.log("convoToBeDeleted " + convoToBeDeleted);
+  			} else {
+  				// add entry to string that will be used for updating availability section under user
+  				updatedConvoString += allCurrentConvosArr[j].innerText + ",";
+          console.log("updatedConvoString " + updatedConvoString);
+  			}
+  		}
+
+
+
+      var uid = firebase.auth().currentUser.uid;
+      var fbRef = firebase.database().ref();
+
+
+
+      fbRef.child("Users").child(uid).once("value", function(snapshot) {
+
+      var name = snapshot.val().Name;
+
+      var convo1 = convoToBeDeleted + "-" + name;
+      var convo2 = name + "-" + convoToBeDeleted;
+
 
       try {
         var fbRefUsers = firebase.database().ref().child('Messages').child(convo1);
@@ -61,11 +80,16 @@
         alert(err.message);
       }
 
+      });
+
+
+
+
     }
 
   </script>
 
-  <script src="deleteconversations.js"></script>
+  <script src="deleteconversations2.js"></script>
 
 </body>
 </html>
