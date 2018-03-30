@@ -29,32 +29,67 @@
     <button onclick="location.href='conversations.html'">Done Editing</button>
   </div>
 
-  <script src="deleteconversations.js"></script>
   <script>
-  function deleteEntry(k)
-  {
-    var convo1 = k+"-"+name
-    var convo2 = name+"-"+k
-    try
-    {
-      var fbRefUsers = firebase.database().ref().child('Messages').child(convo1);
-      fbRefUsers.remove;
-    }
-    catch(err)
-    {
-      document.getElementById("demo").innerHTML = err.message;
-    }
-    try
-    {
-      var fbRefUsers = firebase.database().ref().child('Messages').child(convo2);
-      fbRefUsers.remove;
-    }
-    catch(err)
-    {
-    document.getElementById("demo").innerHTML = err.message;
+
+    function deleteEntry(k, name) {
+
+      var allCurrentConvosArr = document.getElementsByClassName("allConvosClass");
+      var updatedConvoString = ""; // reads as undefined if I don't specify it's a string
+  		var convoToBeDeleted = "";
+
+
+      for (var j = 0; j < allCurrentConvosArr.length; j++) {
+  			if (j == k) {
+  				convoToBeDeleted = allCurrentConvosArr[j].innerText;
+          console.log("convoToBeDeleted " + convoToBeDeleted);
+  			} else {
+  				// add entry to string that will be used for updating availability section under user
+  				updatedConvoString += allCurrentConvosArr[j].innerText + ",";
+          console.log("updatedConvoString " + updatedConvoString);
+  			}
+  		}
+
+
+
+      var uid = firebase.auth().currentUser.uid;
+      var fbRef = firebase.database().ref();
+
+
+
+      fbRef.child("Users").child(uid).once("value", function(snapshot) {
+
+      var name = snapshot.val().Name;
+
+      var convo1 = convoToBeDeleted + "-" + name;
+      var convo2 = name + "-" + convoToBeDeleted;
+
+
+      try {
+        var fbRefUsers = firebase.database().ref().child('Messages').child(convo1);
+        fbRefUsers.remove();
+      } catch(err) {
+        //document.getElementById("demo").innerHTML = err.message;
+        alert(err.message);
+      }
+
+      try {
+        var fbRefUsers = firebase.database().ref().child('Messages').child(convo2);
+        fbRefUsers.remove();
+      } catch(err) {
+        //document.getElementById("demo").innerHTML = err.message;
+        alert(err.message);
+      }
+
+      });
+
+
+
+
     }
 
-  }
   </script>
+
+  <script src="deleteconversations2.js"></script>
+
 </body>
 </html>
