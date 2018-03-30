@@ -26,7 +26,7 @@
   firebase.initializeApp(config);
 
   var fbRef = firebase.database().ref();
-
+  
   firebase.auth().onAuthStateChanged(user => {
 
     if(user) {

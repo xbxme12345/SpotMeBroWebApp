@@ -33,9 +33,6 @@
 
   var availString = "";
 
-
-
-
   firebase.auth().onAuthStateChanged(user => {
     if(user){
 
