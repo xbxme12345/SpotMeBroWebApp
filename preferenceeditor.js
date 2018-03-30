@@ -16,6 +16,14 @@
 
   var fbRef = firebase.database().ref().child('Users');
 
+  var currentUserId = firebase.auth().currentUser.uid;
+  return firebase.database().ref('/Users/' + currentUserId + '/Preferences').once('value').then(function(snapshot){
+    var current_prefGen = snapshot.val().Preferred_Gender;
+    var current_style = snapshot.val().Style;
+    console.log(current_prefGen);
+    console.log(current_style);
+  })
+
   btnSubmitPref.addEventListener('click', e => {
     var userId = firebase.auth().currentUser.uid;
 

@@ -25,6 +25,15 @@
 
   var fbRef = firebase.database().ref();
 
+  firebase.auth().onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
+
+    } else {
+      console.log('not logged in');
+      window.location = "signin.html";
+    }
+  });
+
   firebase.auth().onAuthStateChanged(user => {
     if(user){
       var uid = user.uid;

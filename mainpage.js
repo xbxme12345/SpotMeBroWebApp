@@ -15,24 +15,10 @@
 
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
-      /* // commented out to avoid error in console
-      var uidPERM = firebaseUser.uid;
-      var currentUser = firebaseUser.uid;
-  	  var gender = fbRef.child(uidPERM).child("Gender").val();
-  	  var pref_gender = fbRef.child(uidPERM).child("Preferences").child("Preferred_Gender").val();
-  	  var style = fbRef.child(uidPERM).child("Preferences").child("Style").val();
-	  //assign as global vars */
 
     } else {
-      // also onclick functions for logout button in html file
       console.log('not logged in');
       window.location = "signin.html";
     }
   });
-
-  /*firebase.auth().signOut(firebaseUser =>{
-    console.log("Signed Out");
-    )
-  });*/
-
 } ());
