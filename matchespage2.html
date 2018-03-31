@@ -43,18 +43,28 @@
 	     clickedTime = clickedTime[1].split("_");
 	     document.getElementById("pheading").innerHTML += clickedTime[0] + " " + clickedTime[1];
 			var emailArr = [];
-			dbRef.child(clickedTime[0]).child(clickedTime[1]).once("value", function(snapshot) {
-				snapshot.forEach(function(child) {
-					if (child.key == userid){
-					} else {
-						emailArr.push(child.val().Email);
-						//console.log(child.key + " : " + child.val().Email);
+
+			dbRef.child("Users").child(userid).child("Preferences").once("value", function(snapshot) {
+
+				var myGenPref = snapshot.val().Preferred_Gender;
+				var myStyle = snapshot.val().Style;
+
+				dbRef.child(clickedTime[0]).child(clickedTime[1]).once("value", function(snapshot) {
+					snapshot.forEach(function(child) {
+						if (child.key == userid){
+						} else if (child.val().Gender == myGenPref && child.val().Style == myStyle){
+							emailArr.push(child.val().Email);
+							console.log(child.val().Gender + " : " + child.val().Style);
+						}
+					});
+
+					for (var k = 0; k < emailArr.length; k++) {
+						document.getElementById("pid").innerHTML += "<b><a href=\"matchesprofile.html?email=" + emailArr[k] + "\">" + emailArr[k] + "</br>";
 					}
-				});
-				for (var k = 0; k < emailArr.length; k++) {
-					document.getElementById("pid").innerHTML += "<b><a href=\"matchesprofile.html?email=" + emailArr[k] + "\">" + emailArr[k] + "</br>";
-				}
-			}); // end of snapshot
+				}); // end of snapshot
+
+		}); // snap for personal preferences
+		
 		} // end of getMatches function
 	</script>
 </body>
