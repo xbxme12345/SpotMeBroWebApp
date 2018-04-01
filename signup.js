@@ -48,20 +48,21 @@
     fbRef2.child("Users").once('value',function(snap)
     {
       var retarr = snapshotToArray(snap);
-      var index;
-      var tempname = "no name found";
-      for (index = 0; index <= retarr.length; ++index)
+      var tempname = " ";
+      for(var index = 0; index < retarr.length; index++)
       {
-        if (retarr[index] == txtName)
+        var allName = retarr[index].Name;
+        var inputName = txtName.value
+        if(allName.toLowerCase() == inputName.toLowerCase())
         {
-          tempname = retarr[index];
+          tempname = retarr[index].Name;
         }
       }
 
-      if(tempname == "no name found")
+      if(tempname == " ")
       {
     // sign in
-        if( txtPassword.value == txtPassword2.value)
+        if(txtPassword.value == txtPassword2.value)
         {
           const promise = auth.createUserWithEmailAndPassword(email, pass);
           promise.catch(e => alert(e.message));
@@ -110,8 +111,8 @@
       }
       else
       {
-        console.log('Name already used!!!!!!!');
-        alert("Passwords do not match");
+        console.log('Name already in use');
+        alert("Name already in use");
       }
     });
   });
