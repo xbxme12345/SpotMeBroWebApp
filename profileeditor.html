@@ -45,6 +45,9 @@
     var uidPERM;
     var userId;
 		var nameArr;
+		var messageArr;
+		var userName;
+		var userGender;
 
     firebase.auth().onAuthStateChanged(user => {
       if(user){
@@ -52,8 +55,8 @@
 
         userId = firebase.auth().currentUser.uid;
         return firebase.database().ref('/Users/' + userId).once('value').then(function(snapshot) {
-          var userName = snapshot.val().Name;
-          var userGender = snapshot.val().Gender;
+          userName = snapshot.val().Name;
+          userGender = snapshot.val().Gender;
 
           document.getElementById("Name").innerHTML += userName;
           document.getElementById("Gender").innerHTML += userGender;
@@ -75,6 +78,21 @@
 		}
 
     function submit(){
+			var fbRef2 = firebase.database().ref();
+			console.log("All conversations associated with the current name will be deleted.");
+			fbRef2.child('Messages').once('value', function(snap){
+				var messageArr = snapshotToArray(snap);
+				for(var k = 0; k < messageArr.length; k++){
+					console.log(messageArr[k].key);
+					var messageName = messageArr[k].key;
+					if(messageName.includes(userName)){
+						console.log('messageName');
+						fbRefUsers = firebase.database().ref().child("Messages").child(messageName);
+						fbRefUsers.remove();
+					}
+				}
+			})
+
       var fbRef2 = firebase.database().ref();
 
       fbRef2.child("Users").once("value", function(snap){

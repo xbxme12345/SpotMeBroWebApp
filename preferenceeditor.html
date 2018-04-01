@@ -25,31 +25,53 @@
       <div id="genderPref">
         Preferred Partner's Gender:
         <select id="prefgender" name="prefgender">
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Both">Both</option>
-          <option value="Other">Other</option>
-          <option value="NoPreference">No Preference</option>
+          <option id="Male" value="Male">Male</option>
+          <option id="Female" value="Female">Female</option>
+          <option id="Both" value="Both">Both</option>
+          <option id="Other" value="Other">Other</option>
+          <option id="NoPreference" value="NoPreference">No Preference</option>
         </select> </br>
       </div>
       <div id="stylePref">
         Style:
         <select id="prefStyle" name="style">
-          <option value="CrossFit">Crossfit</option>
-          <option value="PowerLifting">Powerlifting</option>
-          <option value="Cardio">Cardio</option>
+          <option id="CrossFit" value="CrossFit">Crossfit</option>
+          <option id="PowerLifting" value="PowerLifting">Powerlifting</option>
+          <option id="Cardio" value="Cardio">Cardio</option>
         </select>
       </div>
       <button id="submitPref" onclick="submit()">Submit</button>
     </div>
   </div>
 
-  <!-- needs to be at end of file, won't work in head seaction -->
-  <script src="preferenceeditor.js"></script>
   <script>
     var fbRef = firebase.database().ref().child('Users');
-    const new_prefGen = document.getElementById("prefgender");
-    const new_style = document.getElementById("prefStyle");
+    var new_prefGen = document.getElementById("prefgender");
+    var new_style = document.getElementById("prefStyle");
+
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        var currentUserId = firebase.auth().currentUser.uid;
+        firebase.database().ref('/Users/' + currentUserId + '/Preferences').once('value').then(function(snapshot){
+          var current_prefGen = snapshot.val().Preferred_Gender;
+          var current_style = snapshot.val().Style;
+
+          document.getElementById(current_prefGen).selected = "true";
+          document.getElementById(current_style).selected = "true";
+
+          console.log("Current Preferred Gender: " + current_prefGen);
+          console.log("Current Style: " + current_style);
+        })
+      }
+    })
+
+    /*var currentUserId = firebase.auth().currentUser.uid;
+    firebase.database().ref('/Users/' + currentUserId + '/Preference').once('value').then(function(snapshot){
+      var current_prefGen = snapshot.val().Preferred_Gender;
+      var current_style = snapshot.val().Style;
+      console.log("Current Preferred Gender: " + current_prefGen);
+      console.log("Current Style: " + current_style);
+    })*/
 
     function submit(){
       var userId = firebase.auth().currentUser.uid;
@@ -61,6 +83,7 @@
         Style: new_style.value
       });
       alert("preferences have been updated to \'" + new_prefGen.value + "\' and \'" + new_style.value + "\'");
+      window.location.reload();
     }
   </script>
 </body>
