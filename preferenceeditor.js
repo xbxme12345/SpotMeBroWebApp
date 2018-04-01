@@ -19,6 +19,9 @@
   return firebase.database().ref('/Users/' + currentUserId + '/Preferences').once('value').then(function(snapshot){
     var current_prefGen = snapshot.val().Preferred_Gender;
     var current_style = snapshot.val().Style;
+    //Setting the select option placeholder value to be the pre-selected preferences value by the user
+    document.getElementById(current_prefGen).selected = "true";
+    document.getElementById(current_style).selected = "true";
     console.log(current_prefGen);
     console.log(current_style);
   })
