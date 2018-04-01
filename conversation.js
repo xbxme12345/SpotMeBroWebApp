@@ -48,7 +48,7 @@
 
   fbRef.child("Messages").once('value',function(snap)
   {
-    var retarr = snapshotToArray(snap)
+    var retarr = snapshotToArray(snap);
     //console.log(retarr);
     var index;
     for (index = 0; index < retarr.length; index++)
