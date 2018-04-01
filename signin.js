@@ -1,5 +1,4 @@
 (function() {
-
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAK7odv2vBxJdDMThZHkBjoNdsypVNDGDU",
@@ -11,14 +10,12 @@
   };
   firebase.initializeApp(config);
 
-
   // Get elements' reference. Later use .value
   // Did not work if I used .value here
   const txtEmail = document.getElementById("txtEmail");
   const txtPassword = document.getElementById("txtPassword");
   const btnLogin = document.getElementById("btnLogin");
   const btnSignUp = document.getElementById("btnSignUp");
-
 
   // Add login event
   btnLogin.addEventListener('click', e => {
@@ -51,5 +48,4 @@
       document.getElementById("btnLogin").click();
     }
   });
-
 } ());

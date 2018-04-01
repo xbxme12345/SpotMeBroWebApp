@@ -162,7 +162,6 @@
 						document.getElementById("availP").innerHTML += "<ul></br>";
 					}
 					document.getElementById("availP").innerHTML += "<li" + " class=\"availEntries\" id=\"item" + i + "\" onclick=\"deleteEntry(" + i + ")\">" + str[i] +  "</li></br>";
-
 				}
 				document.getElementById("availP").innerHTML += "</ul>";
 			});
@@ -236,17 +235,13 @@ function submitTime(){
 
 			//console.log(day.value + " " + hour.value + " " + ampm.value);
 			//console.log("hourMT is equal to " + hourMT);
-
 		}
-
 
 		var user = firebase.auth().currentUser;
 		var userEmail = user.email;
 		var userId = user.uid;
 
 		availString += day.value + " " + hourMT + " " + ampm.value + ",";
-
-
 
 		var style;
 		var gender;
@@ -265,15 +260,11 @@ function submitTime(){
 					Email: userEmail
 				});
 
-
-
 				/* says null right before first entry MUST FIX! */
 				// update availability in db under uid
 				fbRef.child(userId).update({
 					Availability: availString
 				});
-
-
 
 				//alert("Availability has been entered for " + day.value + " " + hour.value + ampm.value + " (" + hourMT + ")");
 				//console.log(availString);

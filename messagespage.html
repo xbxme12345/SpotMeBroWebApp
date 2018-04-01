@@ -1,5 +1,5 @@
+<!DOCTYPE html>
 <html>
-<body>
 <head>
   <title>Conversation</title>
   <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
@@ -19,6 +19,7 @@
 	</script>
   <link rel="stylesheet" type="text/css" href="messagespage.css">
 </head>
+<body>
   <div class="btn-group">
     <button onclick="location.href='mainpage.html'"><strong>Home Page</strong></a></button>
     <button onclick="location.href='about.html'"><strong>About SpotMeBro</strong></button>
@@ -60,7 +61,6 @@
       return returnArr;
   };
 
-
   var peeps = window.location.href.split("?");
   peeps = peeps[1].split("&");
   var myname = peeps[1];
@@ -86,7 +86,6 @@
     //console.log(myname);
   }
 
-
   var fbRef = firebase.database().ref();
 
   fbRef.child("Messages").child(convo).child("MessageList").on('value',function(snap) { //.once
@@ -109,7 +108,6 @@
       //console.log("person0 is " + person[0]);
       //console.log("person1 is " + person[1]);
 
-
       document.getElementById("pid").innerHTML += itemName + "</br>";
 
       // trying to change font color depending on who sends message
@@ -122,11 +120,7 @@
 
     }
   });
-
-
-
   </script>
   <script type="text/javascript" src="messagespage.js"></script>
-
 </body>
 </html>

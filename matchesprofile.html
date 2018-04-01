@@ -103,8 +103,6 @@
       console.log(emailVal);
       console.log(genderVal);
 
-
-
       var userId = firebase.auth().currentUser.uid;
       return firebase.database().ref('/Users/' + userId).once('value').then(function(snapshot) {
 
@@ -114,14 +112,11 @@
         var month = months[d.getMonth()];
         var day = d.getDate();
 
-
-
         var today = new Date();
         var h = today.getHours();
         var m = today.getMinutes();
         var s = today.getSeconds();
         var md = "";
-
 
         if (m < 10) {
           m = "0" + m;
@@ -130,7 +125,6 @@
         if (s < 10) {
           s = "0" + s;
         }
-
 
         if (h >= 12) {
           md = "PM";
@@ -141,27 +135,17 @@
           md = "AM";
         }
 
-
-
-
-
         firebase.database().ref().child("Messages").child(nameVal + "-" + myname).child("MessageList").push().set(
            // make like mobile
            "Started a conversation-" + myname + "-" + month + " " + day + ", " + d.getFullYear() + " " +  h + ":" + m + ":" + s + " " + md
         );
 
-
         alert ("You have just started a conversation with " + nameVal + "! Please click on the conversations tab on the left side of the screen to view all your conversations.");
-
-
       });
-
-
           /*
           firebase.database().ref().child("Messages").child(myname + "-" +nameVal).child("MessageList").set({
              a:"text"
           }); */
-
   }
 </script>
 </body>
