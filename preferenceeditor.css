@@ -50,8 +50,8 @@
   margin-bottom: 15px;
 }
 
-#preferenceContainer #prefGender,
-#preferenceContainer #prefStyle {
+#preferenceContainer #genderPref #prefgender,
+#preferenceContainer #stylePref #prefStyle{
   display: block;
   box-sizing: border-box;
   width: 100%;

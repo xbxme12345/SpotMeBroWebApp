@@ -12,7 +12,6 @@
 
   var fbRef = firebase.database().ref();
 
-
   /*
   times = availabilities.split(",");
   for (var k = 0; k < times.length; k++)
@@ -43,7 +42,6 @@
 
       fbRef.child("Users").child(uid).child("Availability").on("value", function(snapshot) {
         availString = snapshot.val();
-
         console.log(availString);
 
         getMatches(uid, availString);
@@ -54,5 +52,4 @@
       });
     }
   })
-
 } ());

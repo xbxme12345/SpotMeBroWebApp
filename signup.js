@@ -1,5 +1,4 @@
 (function () {
-
   function snapshotToArray(snapshot) {
       var returnArr = [];
 
@@ -48,14 +47,14 @@
 
     fbRef2.child("Users").once('value',function(snap)
     {
-      var retarr = snapshotToArray(snap)
+      var retarr = snapshotToArray(snap);
       var index;
-      var tempname = "no name found"
+      var tempname = "no name found";
       for (index = 0; index <= retarr.length; ++index)
       {
         if (retarr[index] == txtName)
         {
-          tempname = retarr[index]
+          tempname = retarr[index];
         }
       }
 
@@ -102,8 +101,6 @@
                 console.log('not logged in');
               }
             })
-
-
         }
         else
         {
@@ -117,11 +114,5 @@
         alert("Passwords do not match");
       }
     });
-
-
-
-
-
-});
-
+  });
 } ());

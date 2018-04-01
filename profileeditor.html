@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+  <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script type="text/javascript" src="mainpage.js"></script>
+	<link rel="stylesheet" type="text/css" href="profileeditor.css">
+</head>
+<body>
+	<div class="container">
+		<nav class="btn-group">
+			<button onclick="location.href='mainpage.html'"><strong>Home Page</strong></a></button>
+      <button onclick="location.href='about.html'"><strong>About SpotMeBro</strong></button>
+      <button onclick="location.href='matchespage.html'"><strong>Go to your Matches</strong></button>
+      <button onclick="location.href='preferenceEditor.html'"><strong>Go to your Preference Editor</strong></button>
+      <button onclick="location.href='profilepage.html'"><strong>Go to your Profile</strong></button>
+      <button onclick="location.href='availability.html'"><strong>Select your Availability</strong></button>
+			<button onclick="location.href='conversations.html'"><strong>Conversations</strong></button>
+      <button onclick="location.href='contact.html'"><strong>Contact SpotMeBro</strong></button>
+			<button onclick="location.href='help.html'"><strong>Help</strong></button>
+			<button id="btnSignOut" onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
+		</nav>
+		<div id="profileEditorContainer">
+			<h1>Profile Editor</h1>
+			<div id="editInfo">
+				<p id="Name">Current Name: </p>
+        <input id="txtName" type="text" placeholder="Name"><br/>
+				<p id="Gender">Current Gender: </p>
+        <select id="selectGender" name="gender">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+			</div>
+      <button onclick="location.href='profilepage.html'">Done Editing</button>
+      <button id="submitProfileChanges" onclick="submit()">Submit</button>
+		</div>
+	</div>
+
+  <script>
+    var fbRef = firebase.database().ref().child('Users');
+    var newUserName = document.getElementById('txtName');
+    var newUserGender = document.getElementById('selectGender');
+    var uidPERM;
+    var userId;
+
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        uidPERM = user.uid;
+
+        userId = firebase.auth().currentUser.uid;
+        return firebase.database().ref('/Users/' + userId).once('value').then(function(snapshot) {
+          var userName = snapshot.val().Name;
+          var userGender = snapshot.val().Gender;
+
+          document.getElementById("Name").innerHTML += userName;
+          document.getElementById("Gender").innerHTML += userGender;
+        });
+      }
+    })
+
+    function submit(){
+      fbRef.child(userId).set({
+        Name: newUserName.value,
+        Gender: newUserGender.value
+      });
+      alert("Profile changes has been updated to " + newUserName.value + " and " + newUserGender.value + ".");
+      window.location.reload();
+    }
+  </script>
+</body>
+</html>

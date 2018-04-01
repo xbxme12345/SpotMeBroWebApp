@@ -1,95 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Conversations</title>
-  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-  <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-  <link rel="stylesheet" type="text/css" href="conversations.css">
+ <title>Conversations</title>
+ <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+ <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+ <link rel="stylesheet" type="text/css" href="conversations.css">
 </head>
 <body>
-  <div class="btn-group">
-    <button onclick="location.href='mainpage.html'"><strong>Home Page</strong></a></button>
-    <button onclick="location.href='about.html'"><strong>About SpotMeBro</strong></button>
-    <button onclick="location.href='matchespage.html'"><strong>Go to your Matches</strong></button>
-    <button onclick="location.href='preferenceEditor.html'"><strong>Go to your Preference Editor</strong></button>
-    <button onclick="location.href='profilepage.html'"><strong>Go to your Profile</strong></button>
-    <button onclick="location.href='availability.html'"><strong>Select your Availability</strong></button>
-    <button onclick="location.href='conversations.html'"><strong>Conversations</strong></button>
-    <button onclick="location.href='contact.html'"><strong>Contact SpotMeBro</strong></button>
-    <button onclick="location.href='help.html'"><strong>Help</strong></button>
-    <button id="btnSignOut" onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
-  </div>
+ <div class="btn-group">
+   <button onclick="location.href='mainpage.html'"><strong>Home Page</strong></a></button>
+   <button onclick="location.href='about.html'"><strong>About SpotMeBro</strong></button>
+   <button onclick="location.href='matchespage.html'"><strong>Go to your Matches</strong></button>
+   <button onclick="location.href='preferenceEditor.html'"><strong>Go to your Preference Editor</strong></button>
+   <button onclick="location.href='profilepage.html'"><strong>Go to your Profile</strong></button>
+   <button onclick="location.href='availability.html'"><strong>Select your Availability</strong></button>
+   <button onclick="location.href='conversations.html'"><strong>Conversations</strong></button>
+   <button onclick="location.href='contact.html'"><strong>Contact SpotMeBro</strong></button>
+   <button onclick="location.href='help.html'"><strong>Help</strong></button>
+   <button id="btnSignOut" onclick="firebase.auth().signOut();" onclick="window.location = 'signin.html'"><strong>Logout</strong></button>
+ </div>
 
-  <div id="container">
-    <h1>Delete Conversation</h1>
-    <div id="deleteConversation">
-      <!--Insert Conversations Here-->
-      <p id="pid"></p>
-    </div>
-    <button onclick="location.href='conversations.html'">Done Editing</button>
-  </div>
+ <div id="container">
+   <h1>Delete Conversation</h1>
+   <div id="deleteConversation">
+     <!--Insert Conversations Here-->
+     <p id="pid"></p>
+   </div>
+   <button onclick="location.href='conversations.html'">Done Editing</button>
+ </div>
 
-  <script>
+ <script>
 
-    function deleteEntry(k, name) {
+  function deleteEntry(k, name) {
 
-      var allCurrentConvosArr = document.getElementsByClassName("allConvosClass");
-      var updatedConvoString = ""; // reads as undefined if I don't specify it's a string
-  		var convoToBeDeleted = "";
-
-
-      for (var j = 0; j < allCurrentConvosArr.length; j++) {
-  			if (j == k) {
-  				convoToBeDeleted = allCurrentConvosArr[j].innerText;
-          console.log("convoToBeDeleted " + convoToBeDeleted);
-  			} else {
-  				// add entry to string that will be used for updating availability section under user
-  				updatedConvoString += allCurrentConvosArr[j].innerText + ",";
-          console.log("updatedConvoString " + updatedConvoString);
-  			}
-  		}
+    var allCurrentConvosArr = document.getElementsByClassName("allConvosClass");
+    var updatedConvoString = ""; // reads as undefined if I don't specify it's a string
+    var convoToBeDeleted = "";
 
 
-
-      var uid = firebase.auth().currentUser.uid;
-      var fbRef = firebase.database().ref();
-
-
-
-      fbRef.child("Users").child(uid).once("value", function(snapshot) {
-
-      var name = snapshot.val().Name;
-
-      var convo1 = convoToBeDeleted + "-" + name;
-      var convo2 = name + "-" + convoToBeDeleted;
-
-
-      try {
-        var fbRefUsers = firebase.database().ref().child('Messages').child(convo1);
-        fbRefUsers.remove();
-      } catch(err) {
-        //document.getElementById("demo").innerHTML = err.message;
-        alert(err.message);
+    for (var j = 0; j < allCurrentConvosArr.length; j++) {
+      if (j == k) {
+        convoToBeDeleted = allCurrentConvosArr[j].innerText;
+        console.log("convoToBeDeleted " + convoToBeDeleted);
+      } else {
+        // add entry to string that will be used for updating availability section under user
+        updatedConvoString += allCurrentConvosArr[j].innerText + ",";
+        console.log("updatedConvoString " + updatedConvoString);
       }
-
-      try {
-        var fbRefUsers = firebase.database().ref().child('Messages').child(convo2);
-        fbRefUsers.remove();
-      } catch(err) {
-        //document.getElementById("demo").innerHTML = err.message;
-        alert(err.message);
-      }
-
-      });
-
-
-
-
     }
 
-  </script>
+    var uid = firebase.auth().currentUser.uid;
+    var fbRef = firebase.database().ref();
 
-  <script src="deleteconversations.js"></script>
+    fbRef.child("Users").child(uid).once("value", function(snapshot) {
+
+    var name = snapshot.val().Name;
+
+    var convo1 = convoToBeDeleted + "-" + name;
+    var convo2 = name + "-" + convoToBeDeleted;
+    var fbRefUsers;
+
+    try {
+      fbRefUsers = firebase.database().ref().child("Messages").child(convo1);
+      fbRefUsers.remove();
+      console.log("convo1 & convo2: " + convo1);
+    } catch(err) {
+      alert(err.message);
+    }
+
+    try {
+      fbRefUsers = firebase.database().ref().child("Messages").child(convo2);
+      fbRefUsers.remove();
+      console.log("convo1 & convo2: " + convo2);
+    } catch(err) {
+      alert(err.message);
+    }
+  });
+}
+</script>
+
+<script src="deleteconversations.js"></script>
 
 </body>
 </html>
