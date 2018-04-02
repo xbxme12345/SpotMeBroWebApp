@@ -80,7 +80,8 @@
       for(var i = 0; i < keys.length; i++){
         var k = keys[i];
         var emailFbVal = allData[k].Email;
-        if(clickedMatchesEmail[1] == emailFbVal){
+        var checkEmail = clickedMatchesEmail[1];
+        if(checkEmail == emailFbVal){
           nameVal = allData[k].Name;
           emailVal = allData[k].Email;
           genderVal = allData[k].Gender;
