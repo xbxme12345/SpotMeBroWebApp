@@ -54,7 +54,7 @@
 #container #messagesSection .messagewindow {
   background-color: #7bb9f7;
   width: 100%;
-  height: 70%;
+  height: 350px;
   overflow: auto;
 }
 
