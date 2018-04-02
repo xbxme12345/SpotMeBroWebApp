@@ -43,17 +43,17 @@
     var newUserName = document.getElementById('txtName');
     var newUserGender = document.getElementById('selectGender');
     var uidPERM;
-    var userId;
 		var nameArr;
 		var messageArr;
 		var userName;
 		var userGender;
+		var tmpName = " ";
 
     firebase.auth().onAuthStateChanged(user => {
       if(user){
         uidPERM = user.uid;
 
-        userId = firebase.auth().currentUser.uid;
+        var userId = firebase.auth().currentUser.uid;
         return firebase.database().ref('/Users/' + userId).once('value').then(function(snapshot) {
           userName = snapshot.val().Name;
           userGender = snapshot.val().Gender;
@@ -77,7 +77,9 @@
 			return returnArr;
 		}
 
+		//Function when user clicks submit
     function submit(){
+			//Gets all conversations associated with the user's current name
 			var fbRef2 = firebase.database().ref();
 			console.log("All conversations associated with the current name will be deleted.");
 			fbRef2.child('Messages').once('value', function(snap){
@@ -94,10 +96,10 @@
 			})
 
       var fbRef2 = firebase.database().ref();
+			var userId = firebase.auth().currentUser.uid;
 
       fbRef2.child("Users").once("value", function(snap){
 				nameArr = snapshotToArray(snap);
-        var tmpName = " ";
 				for(var i = 0; i < nameArr.length; i++){
 					var matchedName = nameArr[i].Name;
 					var newName = newUserName.value;
@@ -105,18 +107,20 @@
 						tmpName = nameArr[i].Name;
 					}
 				}
-        if(tmpName == " "){
-          fbRef.child(userId).set({
-            Name: newUserName.value,
-            Gender: newUserGender.value
-          });
-          alert("Profile changes has been updated to " + newUserName.value + " and " + newUserGender.value + ".");
-          window.location.reload();
-        } else {
-          console.log("Name already in use.");
-          alert("Name already in use.");
-        }
       })
+
+			//Sets user's new name and gender if the inputted name is not in use.
+			if(tmpName == " "){
+				fbRef.child(userId).update({
+					Name: newUserName.value,
+					Gender: newUserGender.value
+				});
+				alert("Profile changes has been updated to " + newUserName.value + " and " + newUserGender.value + ".");
+				window.location.reload();
+			} else {
+				console.log("Name already in use.");
+				alert("Name already in use.");
+			}
     }
 
 

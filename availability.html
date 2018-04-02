@@ -157,11 +157,17 @@
 				/* implement sorting algo to put in day of week order then chrono order */
 
 				for (var i = 0; i < len; i++) {
-
 					if (i == 0) {
 						document.getElementById("availP").innerHTML += "<ul></br>";
 					}
+					/*if(str[i] > 12){
+						str[i] = str[i] - 12;
+						document.getElementById("availP").innerHTML += "<li" + " class=\"availEntries\" id=\"item" + i + "\" onclick=\"deleteEntry(" + i + ")\">" + str[i] +  "</li></br>";
+					} else {
+						document.getElementById("availP").innerHTML += "<li" + " class=\"availEntries\" id=\"item" + i + "\" onclick=\"deleteEntry(" + i + ")\">" + str[i] +  "</li></br>";
+					}*/
 					document.getElementById("availP").innerHTML += "<li" + " class=\"availEntries\" id=\"item" + i + "\" onclick=\"deleteEntry(" + i + ")\">" + str[i] +  "</li></br>";
+					console.log(str[i]);
 				}
 				document.getElementById("availP").innerHTML += "</ul>";
 			});
