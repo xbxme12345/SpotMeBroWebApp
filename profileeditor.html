@@ -106,7 +106,7 @@
                 String[] parts = available[i].split(" ");
                 String Day = parts[0];
                 String Time = parts[1];
-                fbRefUsers = firebase.database().ref().child(Day).child(Time).child(UID);
+                myRef4 = firebase.database().ref().child(Day).child(Time).child(UID);
                 myRef4.remove();
           }
           catch (ArrayIndexOutOfBoundsException e)
