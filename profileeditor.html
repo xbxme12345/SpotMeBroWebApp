@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
   <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   <script type="text/javascript" src="mainpage.js"></script>
 	<link rel="stylesheet" type="text/css" href="profileeditor.css">
@@ -81,11 +81,13 @@
 
 		//Function when user clicks submit
     function submit(){
-			//Gets all conversations associated with the user's current name
 			var fbRef2 = firebase.database().ref();
+			var userId = firebase.auth().currentUser.uid;
+			//Gets all conversations associated with the user's current name
 			console.log("All conversations associated with the current name will be deleted.");
 			fbRef2.child('Messages').once('value', function(snap){
 				var messageArr = snapshotToArray(snap);
+				console.log(messageArr);
 				for(var k = 0; k < messageArr.length; k++){
 					console.log(messageArr[k].key);
 					var messageName = messageArr[k].key;
@@ -97,39 +99,45 @@
 				}
 			})
 
+			var parts = [];
+			var fbRefUsers2;
+			var fbRef3 = firebase.database().ref().child('Users').child(userId);
+			var fbRef4 = firebase.database().ref();
 			console.log('All availabilities associated with the current name will be deleted');
-			fbRef2.child('Users').child(userId).child('Availability').once('value', function(snap){
-				var availabilityArr = snapshotToArray(snap);
-				for(var k = 0; k < availabilityArr.length; k++)
-				{
-					try {
-                String[] parts = availabilityArr[i].split(" ");
-                String Day = parts[0];
-                String Time = parts[1];
-                myRef4 = firebase.database().ref().child(Day).child(Time).child(userId);
-                myRef4.remove();
-          }
-          catch (ArrayIndexOutOfBoundsException e)
-          {
+			fbRef3.child('Availability').once('value', function(snap){
+				var string = snap.val();
+				var availabilityArr = string.split(",");
+				for(var k = 0; k < availabilityArr.length; k++){
+					if(k == availabilityArr.length - 1){
 
-          }
+					} else {
+						var availabilityName = availabilityArr[k];
+						parts = availabilityName.split(" ");
+						var Day = parts[0];
+						var Time = parts[1];
+						console.log("Availability: " + availabilityName);
+						console.log("User id: " + userId);
+						fbRef4.child(Day).child(Time).child(userId).remove();
+					}
 				}
+				fbRef3.update({
+					Availability: ""
+				});
 			})
-
-      var fbRef2 = firebase.database().ref();
-			var userId = firebase.auth().currentUser.uid;
 
       fbRef2.child("Users").once("value", function(snap){
 				nameArr = snapshotToArray(snap);
 				for(var i = 0; i < nameArr.length; i++){
 					var matchedName = nameArr[i].Name;
 					var newName = newUserName.value;
-					if(matchedName.toLowerCase() == newName.toLowerCase()){
+					if(matchedName == newName){
 						tmpName = nameArr[i].Name;
 					}
 				}
+				//Sets user's new name and gender if the inputted name is not in use.
         if(tmpName == " "){
           fbRef.child(userId).update({
+						Name: newUserName.value,
             Gender: newUserGender.value
           });
           alert("Profile changes has been updated to " + newUserName.value + " and " + newUserGender.value + ".");
@@ -139,30 +147,7 @@
           alert("Name already in use.");
         }
       })
-
-			//Sets user's new name and gender if the inputted name is not in use.
-			if(tmpName == " "){
-				fbRef.child(userId).update({
-					Name: newUserName.value,
-					Gender: newUserGender.value
-				});
-				alert("Profile changes has been updated to " + newUserName.value + " and " + newUserGender.value + ".");
-				window.location.reload();
-			} else {
-				console.log("Name already in use.");
-				alert("Name already in use.");
-			}
     }
-
-
-    /*function submit(){
-      fbRef.child(userId).set({
-        Name: newUserName.value,
-        Gender: newUserGender.value
-      });
-      alert("Profile changes has been updated to " + newUserName.value + " and " + newUserGender.value + ".");
-      window.location.reload();
-    }*/
   </script>
 </body>
 </html>
