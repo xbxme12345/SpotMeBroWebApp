@@ -103,10 +103,10 @@
 				for(var k = 0; k < availabilityArr.length; k++)
 				{
 					try {
-                String[] parts = available[i].split(" ");
+                String[] parts = availabilityArr[i].split(" ");
                 String Day = parts[0];
                 String Time = parts[1];
-                myRef4 = firebase.database().ref().child(Day).child(Time).child(UID);
+                myRef4 = firebase.database().ref().child(Day).child(Time).child(userId);
                 myRef4.remove();
           }
           catch (ArrayIndexOutOfBoundsException e)
