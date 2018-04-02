@@ -38,7 +38,12 @@
 
 		for (var i = 0; i < availS.length; i++) {
 			var availS2 = availS[i].split(" ");
-			document.getElementById("pid").innerHTML += "<b><a href=\"matchespage2.html?time="+availS2[0]+"_"+availS2[1]+"\">" + availS2[0] + " " + availS2[1] + "</a></b></br>";
+			if(availS2[1] > 12) {
+				availS2[1] = availS2[1] - 12;
+				document.getElementById("pid").innerHTML += "<b><a href=\"matchespage2.html?time="+availS2[0]+"_"+availS2[1]+"_"+availS2[2]+"\">" + availS2[0] + " " + availS2[1] + " " + availS2[2] + "</a></b></br>";
+			} else {
+				document.getElementById("pid").innerHTML += "<b><a href=\"matchespage2.html?time="+availS2[0]+"_"+availS2[1]+"_"+availS2[2]+"\">" + availS2[0] + " " + availS2[1] + " " + availS2[2] + "</a></b></br>";
+			}
 		} // end of for loop
 	} // end of getMatches function
 	</script>
