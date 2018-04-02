@@ -46,16 +46,33 @@
 
     var fbRef2 = firebase.database().ref();
 
+    /*fbRef2.child("Users").once('value',function(snap) {
+
+      var retarr = snapshotToArray(snap);
+
+
+    }); // end of snap
+
+
+*/
+
+
+
+
+
+
+
+
     fbRef2.child("Users").once('value',function(snap)
     {
-      var retarr = snapshotToArray(snap)
+      var retarr = snapshotToArray(snap);
       var index;
-      var tempname = "no name found"
+      var tempname = "no name found";
       for (index = 0; index <= retarr.length; ++index)
       {
         if (retarr[index] == txtName)
         {
-          tempname = retarr[index]
+          tempname = retarr[index];
         }
       }
 
@@ -114,9 +131,9 @@
       else
       {
         console.log('Name already used!!!!!!!');
-        alert("Passwords do not match");
+        alert("Name is already in use");
       }
-    });
+    }); // end of snap
 
 
 
