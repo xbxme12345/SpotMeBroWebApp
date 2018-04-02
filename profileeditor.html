@@ -106,8 +106,7 @@
 					}
 				}
         if(tmpName == " "){
-          fbRef.child(userId).set({
-            Name: newUserName.value,
+          fbRef.child(userId).update({
             Gender: newUserGender.value
           });
           alert("Profile changes has been updated to " + newUserName.value + " and " + newUserGender.value + ".");
