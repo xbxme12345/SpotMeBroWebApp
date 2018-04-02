@@ -41,7 +41,7 @@
 	     clickedTime = clickedTime.split("?");
 	     clickedTime = clickedTime[1].split("=");
 	     clickedTime = clickedTime[1].split("_");
-	     document.getElementById("pheading").innerHTML += clickedTime[0] + " " + clickedTime[1];
+	     document.getElementById("pheading").innerHTML += clickedTime[0] + " " + clickedTime[1] + " " + clickedTime[2];
 			var emailArr = [];
 
 			dbRef.child("Users").child(userid).child("Preferences").once("value", function(snapshot) {
