@@ -23,6 +23,8 @@
 		<div id="profileEditorContainer">
 			<h1>Profile Editor</h1>
 			<div id="editInfo">
+				<p style="color:red;">WARNING: If you change your name or gender, all previous conversations
+				and availabilities will be deleted.</p>
 				<p id="Name">Current Name: </p>
         <input id="txtName" type="text" placeholder="Name"><br/>
 				<p id="Gender">Current Gender: </p>
@@ -90,6 +92,20 @@
 					if(messageName.includes(userName)){
 						console.log('messageName');
 						fbRefUsers = firebase.database().ref().child("Messages").child(messageName);
+						fbRefUsers.remove();
+					}
+				}
+			})
+
+			console.log('All availabilities associated with the current name will be deleted');
+			fbRef2.child('Users').child('userId').child('Availability').once('value', function(snap){
+				var availabilityArr = snapshotToArray(snap);
+				for(var k = 0; k < availabilityArr.length; k++){
+					console.log(availabilityArr[k].key);
+					var availabilityName = availabilityArr[k].key;
+					if(availabilityName.includes(userName)){
+						console.log('availabilityName');
+						fbRefUsers = firebase.database().ref().child('Users').child('userId').child('Availability').child(availabilityName);
 						fbRefUsers.remove();
 					}
 				}
