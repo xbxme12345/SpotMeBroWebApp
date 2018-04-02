@@ -45,17 +45,44 @@
 
     var fbRef2 = firebase.database().ref();
 
+    /*fbRef2.child("Users").once('value',function(snap) {
+
+      var retarr = snapshotToArray(snap);
+
+
+    }); // end of snap
+
+
+*/
+
+
+
+
+
+
+
+
     fbRef2.child("Users").once('value',function(snap)
     {
       var retarr = snapshotToArray(snap);
+<<<<<<< HEAD
       var tempname = " ";
       for(var index = 0; index < retarr.length; index++)
+=======
+      var index;
+      var tempname = "no name found";
+      for (index = 0; index <= retarr.length; ++index)
+>>>>>>> e40917b8f981769d2f6443bc326da31ead3e7c09
       {
         var allName = retarr[index].Name;
         var inputName = txtName.value
         if(allName.toLowerCase() == inputName.toLowerCase())
         {
+<<<<<<< HEAD
           tempname = retarr[index].Name;
+=======
+          tempname = retarr[index];
+>>>>>>> e40917b8f981769d2f6443bc326da31ead3e7c09
         }
       }
 
@@ -111,9 +138,23 @@
       }
       else
       {
+<<<<<<< HEAD
         console.log('Name already in use');
         alert("Name already in use");
       }
     });
   });
+=======
+        console.log('Name already used!!!!!!!');
+        alert("Name is already in use");
+      }
+    }); // end of snap
+
+
+
+
+
+});
+
+>>>>>>> e40917b8f981769d2f6443bc326da31ead3e7c09
 } ());
