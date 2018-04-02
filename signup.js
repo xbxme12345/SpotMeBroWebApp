@@ -1,4 +1,5 @@
 (function () {
+
   function snapshotToArray(snapshot) {
       var returnArr = [];
 
@@ -44,28 +45,41 @@
     var auth = firebase.auth();
 
     var fbRef2 = firebase.database().ref();
+    var tempname = "no name found"
+    var query = firebase.database().ref("Users");
+    query.once("value")
+      .then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
 
-    fbRef2.child("Users").once('value',function(snap)
-    {
-      var retarr = snapshotToArray(snap);
-      var tempname = " ";
-      for(var index = 0; index < retarr.length; index++)
-      {
-        var allName = retarr[index].Name;
-        var inputName = txtName.value
-        if(allName.toLowerCase() == inputName.toLowerCase())
-        {
-          tempname = retarr[index].Name;
-        }
-      }
-
-      if(tempname == " ")
+          var childData = childSnapshot.child("Name").val();
+          if (childData == txtName.value)
+          {
+            tempname = childSnapshot.child("Name").val();
+          }
+      });
+      if(tempname == "no name found")
       {
     // sign in
-        if(txtPassword.value == txtPassword2.value)
+        if( txtPassword.value == txtPassword2.value)
         {
           const promise = auth.createUserWithEmailAndPassword(email, pass);
           promise.catch(e => alert(e.message));
+
+        }
+        else
+        {
+          console.log('passwords don\'t match');
+          alert("Passwords do not match");
+        }
+      }
+      else
+      {
+        console.log('Name already used!!!!!!!');
+        alert("Name already used");
+      }
+    });
+});
+
 
           // reference to save data must be set globally
           var fbRef = firebase.database().ref().child('Users');
@@ -97,23 +111,12 @@
                 // passes hashed id as variable in URL
                 window.location = "mainpage.html?uidPerm="+uidPERM;
             }
-              else
-              {
+            else
+            {
                 console.log('not logged in');
-              }
-            })
-        }
-        else
-        {
-          console.log('passwords don\'t match');
-          alert("Passwords do not match");
-        }
-      }
-      else
-      {
-        console.log('Name already in use');
-        alert("Name already in use");
-      }
-    });
-  });
+            }
+          });
+
+
+
 } ());

@@ -123,6 +123,16 @@
 						tmpName = nameArr[i].Name;
 					}
 				}
+        if(tmpName == " "){
+          fbRef.child(userId).update({
+            Gender: newUserGender.value
+          });
+          alert("Profile changes has been updated to " + newUserName.value + " and " + newUserGender.value + ".");
+          window.location.reload();
+        } else {
+          console.log("Name already in use.");
+          alert("Name already in use.");
+        }
       })
 
 			//Sets user's new name and gender if the inputted name is not in use.

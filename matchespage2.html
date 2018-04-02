@@ -52,7 +52,7 @@
 				dbRef.child(clickedTime[0]).child(clickedTime[1]).once("value", function(snapshot) {
 					snapshot.forEach(function(child) {
 						if (child.key == userid){
-						} else if (child.val().Gender == myGenPref && child.val().Style == myStyle){
+						} else if ( (child.val().Gender == myGenPref || myGenPref == "NoPreference") && child.val().Style == myStyle ) {
 							emailArr.push(child.val().Email);
 							console.log(child.val().Gender + " : " + child.val().Style);
 						}
