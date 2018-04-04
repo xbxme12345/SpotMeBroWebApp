@@ -141,7 +141,8 @@
            "Started a conversation-" + myname + "-" + month + " " + day + ", " + d.getFullYear() + " " +  h + ":" + m + ":" + s + " " + md
         );
 
-        alert ("You have just started a conversation with " + nameVal + "! Please click on the conversations tab on the left side of the screen to view all your conversations.");
+        //alert ("You have just started a conversation with " + nameVal + "! Please click on the conversations tab on the left side of the screen to view all your conversations.");
+        window.location.href = "conversations.html";
       });
           /*
           firebase.database().ref().child("Messages").child(myname + "-" +nameVal).child("MessageList").set({
