@@ -1,1 +1,3 @@
-Because I (Kyle Kable) was using the command line, I was not made a contributor until I made commits through Atom at the very end...
+Link for hosted SpotMeBro web application:
+
+spotmebro-82458.firebaseapp.com
